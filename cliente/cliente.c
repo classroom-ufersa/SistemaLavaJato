@@ -1,8 +1,9 @@
 #include "cliente.h"
-#include "veiculo.c"
+#include "../veiculos/veiculos.c"
 
 struct cliente
 {
+    int id;
     char nome[81];
     char telefone[16];
     Veiculo **veiculo;
@@ -48,6 +49,39 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone)
     return new_cliente;
 }
 
-void excluir_cliente(Cliente *c){
-    
+Cliente* excluir_cliente(Cliente *c, int id){
+    Cliente* ant = NULL;
+    Cliente* p = c;
+
+    /* procura elemento na lista,
+        guardando anterior */
+    while (p != NULL && p->id != id){
+        ant = p;
+        p = p->prox;
+    }
+    /* verifica se achou o elemento */
+    if(p==NULL)
+        return c;
+    /* retira elemento */
+    if (ant==NULL)
+        c = p->prox; // retira o elemento do inicio
+    else
+        ant->prox = p->prox; // retira elemento do meio
+    free(p);
+    return c;
+}
+
+Cliente* busca_cliente(Cliente* c, int id){
+    Cliente *p;
+    for(p = c; p!= NULL; p = p->prox){
+        if(p->id == id)
+            return p;
+    }
+    return NULL;
+}
+
+int lst_cliente_vazia(Cliente* l){
+    if(l == NULL)
+        return 1;
+    return 0;
 }
