@@ -85,3 +85,18 @@ int lst_cliente_vazia(Cliente* l){
         return 1;
     return 0;
 }
+
+void imprime_cliente(Cliente *c){
+    Cliente* p;
+    for(p = c; p!=NULL; p = p->prox)
+        printf("ID: %d\tNome: %s\tTelefone: %s\n", p->id, p->nome, p->telefone);
+}
+
+void clientes_libera(Cliente *c){
+    Cliente *p = c;
+    while(p!=NULL){
+        Cliente* t = p->prox;
+        free(c);
+        p = t;
+    }
+}
