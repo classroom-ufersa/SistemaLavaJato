@@ -1,10 +1,9 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include"veiculos.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "../cliente/cliente.h"
 
-typedef struct veiculos
+typedef struct veiculo
 {
     int id;
     char marca[100];
@@ -14,53 +13,66 @@ typedef struct veiculos
     char cor[12];
     Cliente *cliente;
     char tipo_de_servico[100];
-}Veiculo;
+    struct Veiculo *prox;
+} Veiculo;
 
- Veiculo* adicionarVeiculo(int *id, char *modelo, char *tipo_servico, char *placa, char *marca, char *cor, Cliente *cliente){
-    Veiculo *v = (Veiculo*) malloc (sizeof(Veiculo));
-    strcpy(v->placa, placa);
-    strcpy(v->marca, marca);
-    strcpy(v->cor, cor);
-    strcpy(v->modelo, modelo);
-    strcpy(v->tipo_de_servico, tipo_servico);
-    v->id=id;
-    v->cliente= cliente;
-    return (v);
+Veiculo *criarVeiculo(int id, char *modelo, char *tipo_servico, char *placa, char *marca, char *cor, Cliente *cliente)
+{
+    Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+    if (veiculo != NULL)
+    {
+        veiculo->id = id;
+        strcpy(veiculo->modelo, modelo);
+        strcpy(veiculo->tipo_de_servico, tipo_servico);
+        strcpy(veiculo->placa, placa);
+        strcpy(veiculo->marca, marca);
+        strcpy(veiculo->cor, cor);
+        veiculo->cliente = cliente;
+        veiculo->atendido = 0;
+        veiculo->prox = NULL;
+    }
+    return veiculo;
 }
-void gerenciamento_de_veiculos(Veiculo* veiculos, int n){
-    printf ("Registrar veiculos atendidos");
-    int gerenciador;
-    int i;
-    for (i = 0; i < n; i++){
-        if(veiculos[i].atendido==0){
-            printf("ID: %d, Tipo de serviço: %s, Marca: %s, Modelo: %s, Placa: %s\n", veiculos[i].tipo_de_servico, veiculos[i].marca, veiculos[i].modelo, veiculos[i].placa);
-        }
-        
 
-        
+Veiculo *adicionarVeiculo(Veiculo *lista, Veiculo *veiculo)
+{
+    veiculo->prox = lista;
+    return veiculo;
+}
+
+void listarVeiculosNaoAtendidos(Veiculo *lista)
+{
+    printf("Lista de Veiculos Nao Atendidos:\n");
+    while (lista != NULL)
+    {
+        if (lista->atendido == 0)
+        {
+            printf("ID: %d, Tipo de servico: %s, Marca: %s, Modelo: %s, Placa: %s\n",
+                   lista->id, lista->tipo_de_servico, lista->marca, lista->modelo, lista->placa);
+        }
+        lista = lista->prox;
     }
 }
-Veiculo* buscar_veiculo(Veiculo **veiculos, int n, int *id){
-    int i;
-    for(i=0; i < n; i++){
-        if(veiculos[i]->id==id){
-            return veiculos[i];
+
+Veiculo *buscarVeiculoPorID(Veiculo *lista, int id)
+{
+    while (lista != NULL)
+    {
+        if (lista->id == id)
+        {
+            return lista;
         }
+        lista = lista->prox;
     }
     return NULL;
 }
 
-void consultarVeiculosAtendidos(Veiculo* veiculos, int n) {
-    printf("Lista de Veículos Atendidos:\n");
-    int contador = 0;
-    int i;
-    for ( i = 0; i < n; i++) {
-        if (veiculos[i].atendido == 1) {
-            printf("ID: %d,Tipo de serviço: %s, Marca: %s, Modelo: %s, Placa: %s\n", veiculos[i].tipo_de_servico, veiculos[i].marca, veiculos[i].modelo, veiculos[i].placa);
-            contador++;
-        }
-    }
-    if (contador == 0) {
-        printf("Nenhum veiculo em servico encontrado.\n");
+void liberarListaVeiculos(Veiculo *lista)
+{
+    while (lista != NULL)
+    {
+        Veiculo *t = lista;
+        lista = lista->prox;
+        free(t);
     }
 }
