@@ -113,6 +113,7 @@ int lst_cliente_vazia(Cliente *l)
     return 0;
 }
 
+
 void imprime_cliente(Cliente *c)
 {
     Cliente *p;
@@ -126,6 +127,7 @@ void clientes_libera(Cliente *c)
     while (p != NULL)
     {
         Cliente *t = p->prox;
+
         free(c);
         p = t;
     }
