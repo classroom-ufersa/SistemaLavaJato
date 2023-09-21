@@ -4,6 +4,6 @@
 
 typedef struct veiculos Veiculos;
 
-void adicionarVeiculo();
+Veiculo* adicionarVeiculo(char *modelo, char *tipo_servico, char *placa, char *marca, char *cor, Cliente *cliente);
 void listarVeiculosAtendidos();
 void consultarVeiculosAtendidos(Veiculos* veiculos, int n);
