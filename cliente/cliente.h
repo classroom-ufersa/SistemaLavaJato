@@ -1,10 +1,17 @@
 #ifndef CLIENTE_H
+#define CLIENTE_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+struct veiculo; // Declaração avançada da estrutura Veiculo
+typedef struct veiculo Veiculo;
+
 typedef struct cliente Cliente;
+
+/* Resto do código de cliente.h */
+
 /* Insere novo cliente em uma lista de clientes de ordenada por nome */
 Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id);
 /* Exclui cliente de uma lista de clientes */
@@ -18,5 +25,4 @@ void imprime_cliente(Cliente *c);
 /* Libera uma lista de cliente da memoria */
 void clientes_libera(Cliente *c);
 
-#define CLIENTE_H
 #endif // CLIENTE_H

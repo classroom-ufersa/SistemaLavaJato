@@ -1,12 +1,12 @@
 #include "cliente.h"
-#include "../veiculos/veiculos.c"
+#include "../veiculos/veiculos.h"
 
 struct cliente
 {
     int id;
     char nome[81];
     char telefone[16];
-    Veiculo **veiculo;
+    Veiculo *veiculo;
     struct cliente *prox;
 };
 
@@ -17,43 +17,46 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id)
     Cliente *p = c;
 
     /*procurando posição de inserção*/
-    while (p != NULL && p->id < strcmp(p->nome, nome) < 0)
+    while (p != NULL && strcmp(p->nome, nome) < 0)
     {
         ant = p;
         p = p->prox;
     }
     /*Cria novo cliente*/
     new_cliente = (Cliente *)malloc(sizeof(Cliente));
-    new_cliente->veiculo = (Veiculo **)malloc(sizeof(Veiculo *));
+    new_cliente->veiculo = vci_cria();
 
     strcpy(new_cliente->nome, nome);
     strcpy(new_cliente->telefone, telefone);
     new_cliente->id = id;
 
     int adiciona_mais = 1; // 1 true | 0 false
-    char num_placa[7];
-    char marca[21];
-    char cor[10];
+    char marca[100];
+    char modelo[100];
+    char placa[12];
+    char cor[12];
+    char tipo_servico[100];
     int qtd_veiculos = 0;
     printf("Cadastro de veiculo\n");
     while (adiciona_mais == 1)
     {
-        scanf(" 7%[^\n]", num_placa);
-        scanf(" 21%[^\n]", marca);
-        scanf(" 10%[^\n]", cor);
-        new_cliente->veiculo[qtd_veiculos] = cria_veiculo(num_placa, marca, cor, c);
+        printf("Digite a marca:");
+        scanf(" %[^\n]", marca);
+        printf("Digite o modelo:");
+        scanf(" %[^\n]", modelo);
+        printf("Digite a placa do veiculo:");
+        scanf(" %[^\n]", placa);
+        printf("Digite a cor:");
+        scanf(" %[^\n]", cor);
+        printf("Digite o tipo de serviço:");
+        scanf(" %[^\n]", tipo_servico);
+
+        new_cliente->veiculo = vci_add(new_cliente->veiculo, marca, modelo, placa, cor, tipo_servico, new_cliente);
         qtd_veiculos++;
-        printf("Deseja cadastrar mais um veiculo?\n");
-        char escolha;
-        if (getc(escolha) == 's' || getc(escolha) == 'S')
-        {
-            new_cliente->veiculo = (Veiculo **)realloc(new_cliente->veiculo, ++qtd_veiculos * (sizeof(Veiculo *)));
-            scanf(" 7%[^\n]", num_placa);
-            scanf(" 21%[^\n]", marca);
-            scanf(" 10%[^\n]", cor);
-            new_cliente->veiculo[qtd_veiculos] = cria_veiculo(num_placa, marca, cor, c);
-        }
-        else
+        printf("Deseja cadastrar mais um veiculo?(s/N)\n");
+        char resposta;
+        scanf(" %c", &resposta);
+        if (resposta != 's' || resposta != 'S')
             adiciona_mais = 0;
     }
     /*Encandeia cliente*/
@@ -91,6 +94,7 @@ Cliente *excluir_cliente(Cliente *c, int id)
         c = p->prox; // retira o elemento do inicio
     else
         ant->prox = p->prox; // retira elemento do meio
+    p->veiculo = excluir_vci_cliente(p->veiculo, id);
     free(p);
     return c;
 }
@@ -113,12 +117,12 @@ int lst_cliente_vazia(Cliente *l)
     return 0;
 }
 
-
 void imprime_cliente(Cliente *c)
 {
     Cliente *p;
     for (p = c; p != NULL; p = p->prox)
         printf("ID: %d\tNome: %s\tTelefone: %s\n", p->id, p->nome, p->telefone);
+    vci_imprime(c->veiculo);
 }
 
 void clientes_libera(Cliente *c)
@@ -128,7 +132,7 @@ void clientes_libera(Cliente *c)
     {
         Cliente *t = p->prox;
 
-        free(c);
+        free(p);
         p = t;
     }
 }
