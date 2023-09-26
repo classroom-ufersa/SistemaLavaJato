@@ -1,8 +1,5 @@
 #include "cliente.h"
-
 #include "../veiculo/veiculo.h"
-
-
 
 struct cliente
 {
