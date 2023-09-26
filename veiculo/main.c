@@ -1,5 +1,5 @@
-#include "./src/cliente/cliente.c"
-#include "./src/veiculo/veiculo.c"
+#include "../cliente/cliente.c"
+#include "./veiculo.c"
 
 int main()
 {
