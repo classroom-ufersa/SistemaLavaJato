@@ -1,5 +1,8 @@
 #include "cliente.h"
+
 #include "../veiculo/veiculo.h"
+
+
 
 struct cliente
 {
@@ -24,7 +27,10 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id)
     }
     /*Cria novo cliente*/
     new_cliente = (Cliente *)malloc(sizeof(Cliente));
+
     new_cliente->veiculo = NULL;
+
+
 
     strcpy(new_cliente->nome, nome);
     strcpy(new_cliente->telefone, telefone);
@@ -48,10 +54,12 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id)
         scanf(" %[^\n]", placa);
         printf("Digite a cor:");
         scanf(" %[^\n]", cor);
+
         printf("Digite o tipo de servico:");
         scanf(" %[^\n]", tipo_servico);
         Veiculo* aux = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, new_cliente);
         new_cliente->veiculo = adicionarVeiculo(new_cliente->veiculo, aux);
+
         qtd_veiculos++;
         printf("Deseja cadastrar mais um veiculo?(s/N)\n");
         char resposta;
@@ -70,6 +78,8 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id)
         new_cliente->prox = ant->prox;
         ant->prox = new_cliente;
     }
+
+
     return c;
 }
 
@@ -93,7 +103,9 @@ Cliente *excluir_cliente(Cliente *c, int id)
         c = p->prox; // retira o elemento do inicio
     else
         ant->prox = p->prox; // retira elemento do meio
+
     p->veiculo = excluir_vci_cliente(p->veiculo, id, p);
+
     free(p);
     return c;
 }
@@ -119,10 +131,12 @@ int lst_cliente_vazia(Cliente *l)
 void imprime_cliente(Cliente *c)
 {
     Cliente *p;
+
     for (p = c; p != NULL; p = p->prox){
         printf("ID: %d\tNome: %s\tTelefone: %s\n", p->id, p->nome, p->telefone);
         veiculo_imprime(p->veiculo);
     }
+
 }
 
 void clientes_libera(Cliente *c)
