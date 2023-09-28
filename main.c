@@ -49,7 +49,7 @@ int main()
                 if (cliente_buscado != NULL)
                 {
                     clientes = excluir_cliente(clientes, id_busca);
-                    printf ("Cliente exluido com sucesso !\n ")
+                    printf ("Cliente exluido com sucesso !\n ");
                 }
                 else
                 {
