@@ -29,7 +29,7 @@ int main() {
                 scanf ("%s", &tel);
                 printf ("Digite o id\n");
                 scanf ("%d", &id);
-                clientes = add_cliente(clientes, nome, &tel, id);
+                clientes = add_cliente(clientes, nome, tel, id);
                 break;
             case 2:
                  clientes = excluir_cliente(clientes, 1);
@@ -47,7 +47,7 @@ int main() {
                 
                 break;
             case 7:
-                printf("Saindo do programa. Até logo!\n");
+                printf("Saindo do programa. Ate logo!\n");
                 break;
             default:
                 printf("Opção invalida. Tente novamente.\n");
