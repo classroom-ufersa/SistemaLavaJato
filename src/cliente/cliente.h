@@ -24,5 +24,7 @@ int lst_cliente_vazia(Cliente *l);
 void imprime_cliente(Cliente *c);
 /* Libera uma lista de cliente da memoria */
 void clientes_libera(Cliente *c);
+//função que edita as informações do cliente
+Cliente *editar_cliente(Cliente *c, int id);
 
 #endif // CLIENTE_H

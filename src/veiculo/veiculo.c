@@ -107,7 +107,7 @@ Veiculo *vci_retira(Veiculo *v, char *placa)
     if (p == NULL)
         return v;
     /* retira veiculo */
-    if (ant = NULL)
+    if (ant == NULL)
         v = p->prox; /* retira veiculo do inicio */
     else
         ant->prox = p->prox; /* retira elemento do meio */
