@@ -54,7 +54,7 @@ void listarVeiculosNaoAtendidos(Veiculo *lista)
 void veiculo_imprime(Veiculo *v)
 {
     Veiculo *p; // pecorrer a lista
-    printf("ID\tMARCA\tMODELO\tPLACA\tCOR\tSERVICO\n");
+    printf("MARCA\tMODELO\tPLACA\tCOR\tSERVICO\n");
     for (p = v; p != NULL; p = p->prox)
     {
         printf("%s\t%s\t%s\t%s\t%s - CLIENTE %s\n", p->marca, p->modelo, p->placa, p->cor, p->tipo_servico, p->cliente->nome);

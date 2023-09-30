@@ -18,4 +18,5 @@ int vci_is_empty(Veiculo *v);
 Veiculo *vci_retira(Veiculo *v, char *placa);
 Veiculo *excluir_vci_cliente(Veiculo *v, int id, Cliente* cliente);
 
+
 #endif // VEICULO_H
