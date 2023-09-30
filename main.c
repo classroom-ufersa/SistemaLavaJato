@@ -20,6 +20,7 @@ int main()
     Cliente *cliente_buscado = NULL;
     Cliente *clientes = NULL;
     Veiculo *veiculo = NULL;
+    Veiculo *lista_Veiculos = NULL;
     int id;
     int escolha;
     char nome[100];
@@ -28,6 +29,7 @@ int main()
     char resposta;
     int id_case4;
     int id_case5;
+    char placa_case7[12];
     do
     {
         printf("\n=== Menu Lava-Jato ===\n");
@@ -37,7 +39,8 @@ int main()
         printf("4. Buscar Cliente\n");
         printf("5. Editar Informacoes do Cliente\n");
         printf("6. Consultar Veiculos em Servico\n");
-        printf("7. Sair\n");
+        printf("7. Finalizar atendimento\n");
+        printf("8. Sair\n");
         printf("Escolha uma opcao: \n");
         scanf("%d", &escolha);
 
@@ -55,7 +58,7 @@ int main()
             printf("Digite o id: \n");
             scanf("%d", &id);
             limpar_buffer();
-            clientes = add_cliente(clientes, nome, tel, id);
+            clientes = add_cliente(clientes, nome, tel, id, &lista_Veiculos);
             
             break;
         case 2:
@@ -101,17 +104,23 @@ int main()
             maiusculo(nome, nome);
             break;
         case 6:
-            veiculo = clientes;
-            imprime_cliente(veiculo);
+            listarVeiculosNaoAtendidos(lista_Veiculos);
             break;
         case 7:
+            veiculo_imprime(veiculo);
+            printf ("informe a placa do veiculo");
+            scanf (" %[^\n]", placa_case7);
+            limpar_buffer();
+            veiculo = buscarVeiculoPorPlaca(veiculo, placa_case7);
+            lista_Veiculos = AtenderVeiculo(veiculo);
+        case 8:
             printf("Saindo do programa. Ate logo!\n");
             break;
         default:
             printf("Opção invalida. Tente novamente.\n");
             break;
         }
-    } while (escolha != 7);
+    } while (escolha != 8);
     free(clientes);
     return 0;
 }

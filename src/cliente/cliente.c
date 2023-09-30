@@ -10,7 +10,7 @@ struct cliente
     struct cliente *prox;
 };
 
-Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id)
+Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **todos_veiculo)
 {
     Cliente *new_cliente;
     Cliente *ant = NULL;
@@ -53,7 +53,7 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id)
         scanf(" %[^\n]", tipo_servico);
         Veiculo* aux = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, new_cliente);
         new_cliente->veiculo = adicionarVeiculo(new_cliente->veiculo, aux);
-
+        *todos_veiculo = adicionarVeiculo(*todos_veiculo, aux);
         qtd_veiculos++;
         printf("Deseja cadastrar mais um veiculo?(s/N)\n");
         char resposta;

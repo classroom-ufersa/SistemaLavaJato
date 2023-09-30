@@ -38,6 +38,18 @@ Veiculo *adicionarVeiculo(Veiculo *lista, Veiculo *veiculo)
     return veiculo;
 }
 
+Veiculo *AtenderVeiculo(Veiculo *v){
+
+    Veiculo *p;
+      for (p = v; p != NULL; p = p->prox)
+    {
+        if (p->placa == v->placa)
+        p->atendido = 1;
+    }
+
+    return (v);
+}
+
 void listarVeiculosNaoAtendidos(Veiculo *lista)
 {
     printf("Lista de Veiculos Nao Atendidos:\n");
