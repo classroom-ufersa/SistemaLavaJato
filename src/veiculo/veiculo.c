@@ -38,6 +38,18 @@ Veiculo *adicionarVeiculo(Veiculo *lista, Veiculo *veiculo)
     return veiculo;
 }
 
+Veiculo *AtenderVeiculo(Veiculo *v){
+
+    Veiculo *p;
+      for (p = v; p != NULL; p = p->prox)
+    {
+        if (p->placa == v->placa)
+        p->atendido = 1;
+    }
+
+    return (v);
+}
+
 void listarVeiculosNaoAtendidos(Veiculo *lista)
 {
     printf("Lista de Veiculos Nao Atendidos:\n");
@@ -54,7 +66,7 @@ void listarVeiculosNaoAtendidos(Veiculo *lista)
 void veiculo_imprime(Veiculo *v)
 {
     Veiculo *p; // pecorrer a lista
-    printf("ID\tMARCA\tMODELO\tPLACA\tCOR\tSERVICO\n");
+    printf("MARCA\tMODELO\tPLACA\tCOR\tSERVICO\n");
     for (p = v; p != NULL; p = p->prox)
     {
         printf("%s\t%s\t%s\t%s\t%s - CLIENTE %s\n", p->marca, p->modelo, p->placa, p->cor, p->tipo_servico, p->cliente->nome);
@@ -107,7 +119,7 @@ Veiculo *vci_retira(Veiculo *v, char *placa)
     if (p == NULL)
         return v;
     /* retira veiculo */
-    if (ant = NULL)
+    if (ant == NULL)
         v = p->prox; /* retira veiculo do inicio */
     else
         ant->prox = p->prox; /* retira elemento do meio */

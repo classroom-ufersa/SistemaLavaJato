@@ -10,12 +10,11 @@ struct cliente
     struct cliente *prox;
 };
 
-Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id)
+Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **todos_veiculo)
 {
     Cliente *new_cliente;
     Cliente *ant = NULL;
     Cliente *p = c;
-
     /*procurando posição de inserção*/
     while (p != NULL && strcmp(p->nome, nome) < 0)
     {
@@ -26,8 +25,6 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id)
     new_cliente = (Cliente *)malloc(sizeof(Cliente));
 
     new_cliente->veiculo = NULL;
-
-
 
     strcpy(new_cliente->nome, nome);
     strcpy(new_cliente->telefone, telefone);
@@ -56,7 +53,7 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id)
         scanf(" %[^\n]", tipo_servico);
         Veiculo* aux = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, new_cliente);
         new_cliente->veiculo = adicionarVeiculo(new_cliente->veiculo, aux);
-
+        *todos_veiculo = adicionarVeiculo(*todos_veiculo, aux);
         qtd_veiculos++;
         printf("Deseja cadastrar mais um veiculo?(s/N)\n");
         char resposta;
@@ -146,4 +143,26 @@ void clientes_libera(Cliente *c)
         free(p);
         p = t;
     }
+}
+
+Cliente *editar_cliente(Cliente *c, int id) {
+    Cliente *atual = c;
+
+    // Percorrer a lista de clientes
+    while (atual != NULL) {
+        if (atual->id == id) {
+            // Se encontrarmos o cliente com o ID desejado, permitimos a edição das informações
+            printf("Digite o novo nome para o cliente: \n");
+            scanf("%s", atual->nome);
+            printf ("Digite o novo telefone : \n");
+            scanf("%s", atual->telefone);
+            // Outras operações de edição de informações do cliente podem ser adicionadas aqui
+
+            return c; // Retorna o ponteiro original para a lista de clientes com as edições feitas
+        }
+        atual = atual->prox;
+    }
+
+    // Se o cliente com o ID desejado não for encontrado, retornamos a lista original
+    return c;
 }
