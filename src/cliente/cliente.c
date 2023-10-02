@@ -37,6 +37,7 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **t
     char cor[12];
     char tipo_servico[100];
     int qtd_veiculos = 0;
+    char escolha;
     printf("Cadastro de veiculo\n");
     while (adiciona_mais == 1)
     {
@@ -48,10 +49,44 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **t
         scanf(" %[^\n]", placa);
         printf("Digite a cor:");
         scanf(" %[^\n]", cor);
+        while (1)
+        {
+            printf("Escolha uma opcao:\n");
+            printf("1 - Lavagem simples\n");
+            printf("2 - Lavagem com enceramento\n");
+            printf("3 - Polimento\n");
+            printf("4 - Higienizacao de ar-condicionado\n");
+            printf("5 - Higienizacao interna\n");
+            printf("6 - Limpeza e hidratacao de couro\n");
 
-        printf("Digite o tipo de servico:");
-        scanf(" %[^\n]", tipo_servico);
-        Veiculo* aux = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, new_cliente);
+            scanf(" %c", &escolha);
+
+            switch (escolha)
+            {
+            case '1':
+                strcpy(tipo_servico, "Lavagem simples");
+                break;
+            case '2':
+                strcpy(tipo_servico, "Lavagem com enceramento");
+                break;
+            case '3':
+                strcpy(tipo_servico, "Polimento");
+                break;
+            case '4':
+                strcpy(tipo_servico, "Higienizacao de ar-condicionado");
+                break;
+            case '5':
+                strcpy(tipo_servico, "Higienizacao interna");
+                break;
+            case '6':
+                strcpy(tipo_servico, "Limpeza e hidratacao de couro");
+                break;
+            default:
+                printf("Digite um numero de 1 a 6\n");
+            }
+            break;
+        }
+        Veiculo *aux = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, new_cliente);
         new_cliente->veiculo = adicionarVeiculo(new_cliente->veiculo, aux);
         *todos_veiculo = adicionarVeiculo(*todos_veiculo, aux);
         qtd_veiculos++;
@@ -72,7 +107,6 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **t
         new_cliente->prox = ant->prox;
         ant->prox = new_cliente;
     }
-
 
     return c;
 }
@@ -126,11 +160,11 @@ void imprime_cliente(Cliente *c)
 {
     Cliente *p;
 
-    for (p = c; p != NULL; p = p->prox){
+    for (p = c; p != NULL; p = p->prox)
+    {
         printf("ID: %d\tNome: %s\tTelefone: %s\n", p->id, p->nome, p->telefone);
         veiculo_imprime(p->veiculo);
     }
-
 }
 
 void clientes_libera(Cliente *c)
@@ -145,16 +179,19 @@ void clientes_libera(Cliente *c)
     }
 }
 
-Cliente *editar_cliente(Cliente *c, int id) {
+Cliente *editar_cliente(Cliente *c, int id)
+{
     Cliente *atual = c;
 
     // Percorrer a lista de clientes
-    while (atual != NULL) {
-        if (atual->id == id) {
+    while (atual != NULL)
+    {
+        if (atual->id == id)
+        {
             // Se encontrarmos o cliente com o ID desejado, permitimos a edição das informações
             printf("Digite o novo nome para o cliente: \n");
             scanf("%s", atual->nome);
-            printf ("Digite o novo telefone : \n");
+            printf("Digite o novo telefone : \n");
             scanf("%s", atual->telefone);
             // Outras operações de edição de informações do cliente podem ser adicionadas aqui
 
