@@ -1,0 +1,57 @@
+{
+    "clientes": [
+        {
+            "id": "21749548",
+            "nome": "FELIPE",
+            "telefone": "+55 (84) 996579-9714"
+        },
+        {
+            "id": "89760731",
+            "nome": "BRUNO",
+            "telefone": "+55 (84) 999999-9999"
+        }
+    ],
+    "veiculos_fila": [
+        {
+            "marca": "PEGEOUT",
+            "modelo": "106",
+            "placa": "asx342",
+            "cor": "VERMELHO",
+            "tipo_servico": "HIGIENIZACAO DE AR-CONDICIONADO",
+            "status": 0,
+            "cliente": {
+                "id": "21749548",
+                "nome": "FELIPE",
+                "telefone": "+55 (84) 996579-9714"
+            }
+        },
+        {
+            "marca": "CHEVROLET",
+            "modelo": "ONIX 2.0",
+            "placa": "tete231",
+            "cor": "VERMELHO",
+            "tipo_servico": "LIMPEZA E HIDRATACAO DE COURO",
+            "status": 0,
+            "cliente": {
+                "id": "89760731",
+                "nome": "BRUNO",
+                "telefone": "+55 (84) 999999-9999"
+            }
+        }
+    ],
+    "veiculos_atendido": [
+        {
+            "marca": "FIAT",
+            "modelo": "UNO",
+            "placa": "asd123",
+            "cor": "AZUL",
+            "tipo_servico": "POLIMENTO",
+            "status": 1,
+            "cliente": {
+                "id": "21749548",
+                "nome": "FELIPE",
+                "telefone": "+55 (84) 996579-9714"
+            }
+        }
+    ]
+}
