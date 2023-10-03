@@ -52,15 +52,23 @@ Veiculo *AtenderVeiculo(Veiculo *v){
 
 void listarVeiculosNaoAtendidos(Veiculo *lista)
 {
-    printf("Lista de Veiculos Nao Atendidos:\n");
+    int veiculoNaoAtendidoEncontrado = 0; // Variável de controle
+
+    printf("Lista de Veículos Nao Atendidos:\n");
     while (lista != NULL)
     {
         if (lista->atendido == 0)
         {
             printf("ID: %d, Tipo de servico: %s, Marca: %s, Modelo: %s, Placa: %s\n",
                    lista->id, lista->tipo_servico, lista->marca, lista->modelo, lista->placa);
+            veiculoNaoAtendidoEncontrado = 1; // Um veículo não atendido foi encontrado
         }
         lista = lista->prox;
+    }
+
+    if (!veiculoNaoAtendidoEncontrado)
+    {
+        printf("Nenhum veiculo nao esta em servico.\n");
     }
 }
 void veiculo_imprime(Veiculo *v)

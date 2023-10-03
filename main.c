@@ -16,8 +16,7 @@ int gerarId() {
 void limpar_buffer(void)
 {
     char c;
-    while ((c = getchar()) != '\n' && c != EOF)
-        ;
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 void maiusculo(char *s1, char *s2)
@@ -66,17 +65,13 @@ int main()
             printf("digite o nome do cliente: \n");
             scanf(" %s", &nome);
             limpar_buffer();
-            printf("cadastrando %s\n", nome);
+            printf("cadastrando :%s\n", nome);
             maiusculo(nome, nome);
             printf("Digite o numero de telefone: \n");
             scanf(" %s", &tel);
             limpar_buffer();
-            // printf("Digite o id: \n");
-            // scanf("%d", &id);
-            // limpar_buffer();
             id = gerarId();
             clientes = add_cliente(clientes, nome, tel, id, &lista_Veiculos);
-
             break;
         case '2':
             printf("Insira o id do usuario que deseja excluir: \n");
@@ -96,7 +91,7 @@ int main()
                 }
                 else
                 {
-                    printf("Nao foi possivel achar o cliente:\n ");
+                    printf("Nao foi possivel achar o cliente: \n ");
                 }
             }
             free(cliente_buscado);
@@ -105,7 +100,7 @@ int main()
             imprime_cliente(clientes);
             break;
         case '4':
-            printf("Insira o id do cliente que deseja buscar \n");
+            printf("Insira o id do cliente que deseja buscar :\n");
             scanf("%d", &id_case4);
             limpar_buffer();
             cliente_buscado = busca_cliente(clientes, id_case4);
@@ -113,7 +108,7 @@ int main()
             free(cliente_buscado);
             break;
         case '5':
-            printf("Insira o id do cliente que deseja buscar \n");
+            printf("Insira o id do cliente que deseja buscar: \n");
             scanf("%d", &id_case5);
             limpar_buffer();
             cliente_buscado = busca_cliente(clientes, id_case5);
@@ -125,7 +120,7 @@ int main()
             break;
         case '7':
             veiculo_imprime(veiculo);
-            printf("informe a placa do veiculo");
+            printf("Informe a placa do veiculo: ");
             scanf(" %[^\n]", placa_case7);
             limpar_buffer();
             veiculo = buscarVeiculoPorPlaca(veiculo, placa_case7);

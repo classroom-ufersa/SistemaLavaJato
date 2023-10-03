@@ -22,9 +22,14 @@ Cliente *busca_cliente(Cliente *c, int id);
 int lst_cliente_vazia(Cliente *l);
 /* Imprime uma lista de clientes */
 void imprime_cliente(Cliente *c);
-/* Libera uma lista de cliente da memoria */
-void clientes_libera(Cliente *c);
 //função que edita as informações do cliente
 Cliente *editar_cliente(Cliente *c, int id);
+//gera um id aleatorio para cada usuario
+int gerarId();
+//converte todo nome fornecido pro usuario pra maisculo
+void maiusculo(char *s1, char *s2);
+//função usada para limpar o buffer caso tenha algum valor lixo
+void limpar_buffer(void);
+
 
 #endif // CLIENTE_H

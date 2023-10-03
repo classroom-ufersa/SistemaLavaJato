@@ -167,17 +167,6 @@ void imprime_cliente(Cliente *c)
     }
 }
 
-void clientes_libera(Cliente *c)
-{
-    Cliente *p = c;
-    while (p != NULL)
-    {
-        Cliente *t = p->prox;
-
-        free(p);
-        p = t;
-    }
-}
 
 Cliente *editar_cliente(Cliente *c, int id)
 {
