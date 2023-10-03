@@ -54,7 +54,7 @@ void listarVeiculosNaoAtendidos(Veiculo *lista)
 {
     int veiculoNaoAtendidoEncontrado = 0; // Variável de controle
 
-    printf("Lista de Veículos Nao Atendidos:\n");
+    printf("Lista de Veiculos Nao Atendidos:\n");
     while (lista != NULL)
     {
         if (lista->atendido == 0)
