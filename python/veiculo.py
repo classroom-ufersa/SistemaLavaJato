@@ -2,7 +2,7 @@ class Veiculo:
     def __init__(self, marca, modelo, placa, cor, tipo_servico, cliente, status = None):
         self.marca = marca.upper()
         self.modelo = modelo.upper()
-        self.placa = placa
+        self.placa = placa.upper()
         self.cor = cor.upper()
         self.tipo_servico = tipo_servico.upper()
         self.status = 0 # Inicialmente não atendido

@@ -17,7 +17,6 @@ class Telefone:
     # def to_json(self):
     #     return {"telefone": self.telefone}
 
-
     @staticmethod
     def validacao_telefone(telefone):
         # Verifica se o número de telefone tem pelo menos 10 dígitos (incluindo o DDD)
@@ -35,7 +34,7 @@ if __name__ == "__main__":
     while True:
         try:
             telefone1 = Telefone(input('Informe o numero: '))
-            print(telefone1)  # Saída: +55 (11) 23456-789
+            print(telefone1)
 
         except ValueError as e:
             print(e)

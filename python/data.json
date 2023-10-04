@@ -1,24 +1,129 @@
 {
     "clientes": [
         {
-            "id": "21749548",
-            "nome": "FELIPE",
-            "telefone": "+55 (84) 996579-9714"
+            "id": "21745942",
+            "nome": "ABNER",
+            "telefone": "+55 (84) 997941-11223"
         },
         {
             "id": "89760731",
             "nome": "BRUNO",
             "telefone": "+55 (84) 999999-9999"
+        },
+        {
+            "id": "21749548",
+            "nome": "FELIPE",
+            "telefone": "+55 (84) 996579-9714"
+        },
+        {
+            "id": "90945765",
+            "nome": "FELIPE HIDEQUEL",
+            "telefone": "+55 (84) 996579-9714"
+        },
+        {
+            "id": "38524807",
+            "nome": "JHOAN",
+            "telefone": "+55 (84) 999991-1444"
+        },
+        {
+            "id": "28808455",
+            "nome": "PEDRO ANDRADE",
+            "telefone": "+55 (84) 996579-9714"
+        },
+        {
+            "id": "21753980",
+            "nome": "VLAD",
+            "telefone": "+55 (84) 996579-9013"
         }
     ],
     "veiculos_fila": [
         {
+            "marca": "CHEVROLET",
+            "modelo": "OPALA",
+            "placa": "AFX241",
+            "cor": "PRETO",
+            "tipo_servico": "LAVAGEM COM ENCERAMENTO",
+            "status": 0,
+            "cliente": {
+                "id": "21745942",
+                "nome": "ABNER",
+                "telefone": "+55 (84) 997941-11223"
+            }
+        },
+        {
+            "marca": "TOYOTA",
+            "modelo": "COROLLA",
+            "placa": "AFD3123",
+            "cor": "PRETO",
+            "tipo_servico": "LIMPEZA E HIDRATACAO DE COURO",
+            "status": null,
+            "cliente": {
+                "id": "38524807",
+                "nome": "JHOAN",
+                "telefone": "+55 (84) 999991-1444"
+            }
+        },
+        {
+            "marca": "AUDI",
+            "modelo": "A6",
+            "placa": "HTF5JYF",
+            "cor": "PRATA",
+            "tipo_servico": "POLIMENTO",
+            "status": null,
+            "cliente": {
+                "id": "21753980",
+                "nome": "VLAD",
+                "telefone": "+55 (84) 996579-9013"
+            }
+        },
+        {
+            "marca": "HONDA",
+            "modelo": "CIVIC SI",
+            "placa": "ABC1234",
+            "cor": "VERDE",
+            "tipo_servico": "LIMPEZA E HIDRATACAO DE COURO",
+            "status": null,
+            "cliente": {
+                "id": "28808455",
+                "nome": "PEDRO ANDRADE",
+                "telefone": "+55 (84) 996579-9714"
+            }
+        },
+        {
+            "marca": "FIAT",
+            "modelo": "MAREA TURBO",
+            "placa": "GAB3A27",
+            "cor": "AZUL",
+            "tipo_servico": "POLIMENTO",
+            "status": null,
+            "cliente": {
+                "id": "90945765",
+                "nome": "FELIPE HIDEQUEL",
+                "telefone": "+55 (84) 996579-9714"
+            }
+        }
+    ],
+    "veiculos_atendido": [
+        {
+            "marca": "FIAT",
+            "modelo": "UNO",
+            "placa": "ASD123",
+            "cor": "AZUL",
+            "tipo_servico": "POLIMENTO",
+            "status": 1,
+            "cliente": {
+                "id": "21749548",
+                "nome": "FELIPE",
+                "telefone": "+55 (84) 996579-9714"
+            }
+        },
+        {
             "marca": "PEGEOUT",
             "modelo": "106",
-            "placa": "asx342",
+            "placa": "ASX342",
             "cor": "VERMELHO",
             "tipo_servico": "HIGIENIZACAO DE AR-CONDICIONADO",
-            "status": 0,
+            "status": 1,
             "cliente": {
                 "id": "21749548",
                 "nome": "FELIPE",
@@ -28,29 +133,14 @@
         {
             "marca": "CHEVROLET",
             "modelo": "ONIX 2.0",
-            "placa": "tete231",
+            "placa": "TETE231",
             "cor": "VERMELHO",
             "tipo_servico": "LIMPEZA E HIDRATACAO DE COURO",
-            "status": 0,
+            "status": 1,
             "cliente": {
                 "id": "89760731",
                 "nome": "BRUNO",
                 "telefone": "+55 (84) 999999-9999"
-            }
-        }
-    ],
-    "veiculos_atendido": [
-        {
-            "marca": "FIAT",
-            "modelo": "UNO",
-            "placa": "asd123",
-            "cor": "AZUL",
-            "tipo_servico": "POLIMENTO",
-            "status": 1,
-            "cliente": {
-                "id": "21749548",
-                "nome": "FELIPE",
-                "telefone": "+55 (84) 996579-9714"
             }
         }
     ]

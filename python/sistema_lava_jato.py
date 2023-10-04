@@ -9,6 +9,7 @@ class SistemaLavaJato:
         E adiciona o novo veiculo a fila de veiculos,
         caso o cliente já exista, só será adicionado o veiculo    
     """
+
     def adiciona_cliente(self, cliente, veiculo):
         if cliente in self.clientes:
             self.veiculos_fila.append(veiculo)
@@ -20,6 +21,9 @@ class SistemaLavaJato:
         if cliente in self.clientes:
             self.clientes.remove(cliente)
             print(f'Cliente {cliente.nome} removido da lista.')
+            for veiculo in self.veiculos_fila:
+                if cliente.id == veiculo.cliente["id"]:
+                    self.veiculos_fila.remove(veiculo)
             return 1
         print('Cliente não encontrado na lista')
         return 0
@@ -30,17 +34,20 @@ class SistemaLavaJato:
                 return cliente
 
     def buscar_nome(self, nome):
+        cont = 0
         for cliente in self.clientes:
             if cliente.nome == nome:
-                return cliente
-
+                cliente.imprime()
+                cont = cont + 1
+        if cont != 0:
+            return 1
         return None
 
     def imprimir_clientes(self):
         for cliente in self.clientes:
-           cliente.imprime()
+            cliente.imprime()
 
-    def editar_informacoes(self, id, escolha):  # TODO: completar esse metodo
+    def editar_informacoes(self, id, escolha):
         cliente = self.buscar_cliente(id)
         if cliente:
             if escolha == '1':
@@ -110,3 +117,5 @@ class SistemaLavaJato:
                 cliente.nome = nome
                 cliente.telefone = telefone
 
+    def ordernar_clientes_por_nome(self):
+        self.clientes = sorted(self.clientes, key=lambda cliente: cliente.nome)
