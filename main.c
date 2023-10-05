@@ -42,7 +42,7 @@ int main()
     Veiculo *veiculo = NULL;
     Veiculo *lista_Veiculos = NULL;
     int id;
-    char escolha;
+    char escolha[3];
     char nome[100];
     char tel[15];
     int id_busca;
@@ -63,14 +63,14 @@ int main()
         printf("7. Finalizar atendimento\n");
         printf("8. Sair\n");
         printf("Escolha uma opcao: \n");
-        scanf(" %c", &escolha);
+        scanf("%c", &escolha[0]);
         limpar_buffer();
-
-        switch (escolha)
+ 
+        switch (escolha[0])
         {
         case '1':
             printf("Digite o nome do cliente: \n");
-            scanf(" %s", nome);
+            scanf(" %[^\n]", nome);
             limpar_buffer();
             printf("Cadastrando: %s\n", nome);
             maiusculo(nome, nome);
@@ -81,6 +81,7 @@ int main()
             clientes = add_cliente(clientes, nome, tel, id, &lista_Veiculos);
             break;
         case '2':
+            imprime_cliente(clientes);
             printf("Insira o id do usuario que deseja excluir: \n");
             scanf("%d", &id_busca);
             limpar_buffer();
@@ -138,7 +139,7 @@ int main()
             printf("Opcao invalida. Tente novamente.\n");
             break;
         }
-    } while (escolha != '8');
+    } while (escolha[0] != '8');
 
     free(clientes);
     free(veiculo);

@@ -6,6 +6,11 @@
             "telefone": "+55 (84) 997941-11223"
         },
         {
+            "id": "04933686",
+            "nome": "BRUNA NUNES",
+            "telefone": "+55 (85) 992353-3522"
+        },
+        {
             "id": "89760731",
             "nome": "BRUNO",
             "telefone": "+55 (84) 999999-9999"
@@ -26,9 +31,19 @@
             "telefone": "+55 (84) 999991-1444"
         },
         {
+            "id": "96884916",
+            "nome": "NINA",
+            "telefone": "+55 (84) 996482-2312"
+        },
+        {
             "id": "28808455",
             "nome": "PEDRO ANDRADE",
             "telefone": "+55 (84) 996579-9714"
+        },
+        {
+            "id": "67530804",
+            "nome": "ROSANA",
+            "telefone": "+55 (83) 998141-14444"
         },
         {
             "id": "21753980",
@@ -101,6 +116,45 @@
                 "nome": "FELIPE HIDEQUEL",
                 "telefone": "+55 (84) 996579-9714"
             }
+        },
+        {
+            "marca": "VOLKSWAGEN",
+            "modelo": "GOL",
+            "placa": "BRU2022",
+            "cor": "AZUL",
+            "tipo_servico": "LAVAGEM COM ENCERAMENTO",
+            "status": null,
+            "cliente": {
+                "id": "04933686",
+                "nome": "BRUNA NUNES",
+                "telefone": "+55 (85) 992353-3522"
+            }
+        },
+        {
+            "marca": "TESLA",
+            "modelo": "MODEL 3",
+            "placa": "BRU2023",
+            "cor": "VERMELHO",
+            "tipo_servico": "LAVAGEM SIMPLES",
+            "status": null,
+            "cliente": {
+                "id": "96884916",
+                "nome": "NINA",
+                "telefone": "+55 (84) 996482-2312"
+            }
+        },
+        {
+            "marca": "CHEVROLET",
+            "modelo": "CORSA",
+            "placa": "BRU2002",
+            "cor": "PRETO",
+            "tipo_servico": "POLIMENTO",
+            "status": null,
+            "cliente": {
+                "id": "67530804",
+                "nome": "ROSANA",
+                "telefone": "+55 (83) 998141-14444"
+            }
         }
     ],
     "veiculos_atendido": [
@@ -143,5 +197,9 @@
                 "telefone": "+55 (84) 999999-9999"
             }
         }
+    ],
+    "placas": [
+        "bru2023",
+        "bru2002"
     ]
 }

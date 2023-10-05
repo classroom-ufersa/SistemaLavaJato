@@ -74,14 +74,13 @@ def menu_veiculos_atendimento():
 
 if __name__ == '__main__':
     # carrega os dados empacotados em um arquivo json
-    clientes, veiculos_fila, veiculos_atendido = carrega_dados('data.json')
+    clientes, veiculos_fila, veiculos_atendido, placas = carrega_dados('data.json')
     # Cria instancia do sistema
     sistema = SistemaLavaJato()
     # inicializa os campos do sistema com os dados extraidos do dataset
     sistema.clientes = clientes
     sistema.veiculos_fila = veiculos_fila
     sistema.veiculos_atendido = veiculos_atendido
-
     while True:
         escolha = menu()
         sistema.ordernar_clientes_por_nome()
@@ -112,7 +111,11 @@ if __name__ == '__main__':
                         placa = input('Digite a placa : (sem pontuação)')
                         if not re.match(r'[A-Z]{3}[0-9][0-9A-Z][0-9]{2}', placa.upper()):
                             raise ValueError("Placa inválida")
-                        break
+                        if placa in placas:
+                            print('Placa repetida!')
+                        else:
+                            placas.add(placa)
+                            break
                     except ValueError as error:
                         print(error)
                 cor = input('Digite a cor: ')
@@ -125,12 +128,12 @@ if __name__ == '__main__':
                     print('Retornando ao menu principal...', '\n')
                     break
         elif escolha == '2':  # Excluir cliente
-            if len(sistema.clientes) > 0:
+            if len(sistema.clientes) > 0: # se a lista de clientes não estiver vazia
                 sistema.imprimir_clientes()
                 id = input("Informe o ID do cliente a ser excluido ou digite 'q' para retornar ao menu principal:")
-                if id.upper() != 'Q':
-                    cliente_excluir = sistema.buscar_cliente(id)
-                    if cliente_excluir:
+                if id.upper() != 'Q': # se o usuario digitar q, retorna ao menu principal
+                    cliente_excluir = sistema.buscar_cliente(id) # buscando o cliente por id
+                    if cliente_excluir: # Se encontrar o cliente
                         while True:
                             confirme = input(f'Deseja mesmo excluir o cliente {cliente_excluir.nome.upper()}?(S/N) ')
                             if confirme.upper() == 'S':
@@ -203,4 +206,4 @@ if __name__ == '__main__':
         else:
             print('Opção escolhida é inválida!!')
     sistema.ordernar_clientes_por_nome()
-    salvar_dados(sistema, 'data.json')
+    salvar_dados(sistema,placas, 'data.json')
