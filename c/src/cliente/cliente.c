@@ -1,6 +1,13 @@
 #include "cliente.h"
 #include "../veiculo/veiculo.h"
 
+void limpar_buffer(void)
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+        ;
+}
+
 struct cliente
 {
     int id;
@@ -95,6 +102,7 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **t
         scanf(" %c", &resposta);
         if (resposta != 's' || resposta != 'S')
             adiciona_mais = 0;
+        limpar_buffer();
     }
     /*Encandeia cliente*/
     if (ant == NULL) /* insere no inicio */

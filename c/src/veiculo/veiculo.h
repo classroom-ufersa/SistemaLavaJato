@@ -16,7 +16,7 @@ Veiculo* adicionarVeiculo(Veiculo *lista, Veiculo *veiculo);
 //exibe os veiculos que ainda não foram atendidos 
 void listarVeiculosNaoAtendidos(Veiculo *lista);
 //busca o veiculo pela a placa
-Veiculo *buscarVeiculoPorPlaca(Veiculo *lista, char placa);
+Veiculo *buscarVeiculoPorPlaca(Veiculo *lista, char *placa);
 //libera a lista de veiculos
 void liberarListaVeiculos(Veiculo* lista);
 
@@ -27,6 +27,8 @@ Veiculo *vci_retira(Veiculo *v, char *placa);
 Veiculo *excluir_vci_cliente(Veiculo *v, int id, Cliente* cliente);
 //finaliza o atendimento do cliente
 Veiculo *AtenderVeiculo(Veiculo *v);
+
+void veiculo_imprime(Veiculo *v);
 
 
 #endif // VEICULO_H
