@@ -13,7 +13,8 @@ def menu():
     print("4. Buscar cliente")
     print("5. Editar informações de cliente")
     print("6. Consultar veículos em servico")
-    print("7. Sair")
+    print("7. Adicionar veiculo de cliente já cadastrado")
+    print("8. Sair")
 
     return input('Digite uma ação: ')
 
@@ -169,15 +170,18 @@ if __name__ == '__main__':
                             nome_editar = input('Informe o novo nome:')
                             sistema.editar_info_cliente(cliente_buscar, nome_editar.upper(), cliente_buscar.telefone)
                             print('Nome alterado com sucesso!')
+                            break
                         elif qual_informacao == '2':
                             telefone_editar = input('Informe o novo número de telefone:')
                             sistema.editar_info_cliente(cliente_buscar, cliente_buscar.nome, telefone_editar)
                             print('Número alterado com sucesso!')
+                            break
                         elif qual_informacao == '3':
                             nome_editar = input('Informe o novo nome:')
                             telefone_editar = input('Informe o novo número de telefone:')
                             sistema.editar_info_cliente(cliente_buscar, nome_editar.upper(), telefone_editar)
                             print('Dados alterados com sucesso!')
+                            break
                         elif qual_informacao == '4':
                             print('Voltando...')
                             break
@@ -201,7 +205,42 @@ if __name__ == '__main__':
                 else:
                     print('Opção escolhida é inválida!!')
         elif escolha == '7':  # Sair
-            print('saindo...')
+            sistema.imprimir_clientes()
+            id = input("Informe o id do cliente ou digite 'q' para voltar:")
+            if id.upper() != 'Q':
+                cliente_buscar = sistema.buscar_cliente(id)
+                if cliente_buscar:
+                    while True:
+                        print('Adicionando veiculo...')
+                        marca = input('Digite a marca: ')
+                        modelo = input('Digite o modelo: ')
+                        while True:
+                            try:
+                                placa = input('Digite a placa : (sem pontuação)')
+                                if not re.match(r'[A-Z]{3}[0-9][0-9A-Z][0-9]{2}', placa.upper()):
+                                    raise ValueError("Placa inválida")
+                                if placa in placas:
+                                    print('Placa repetida!')
+                                else:
+                                    placas.add(placa)
+                                    break
+                            except ValueError as error:
+                                print(error)
+                        cor = input('Digite a cor: ')
+                        tipo_servico = menu_services()
+                        new_veiculo = Veiculo(marca, modelo, placa, cor, tipo_servico, vars(cliente_buscar))
+                        mais_um_veiculo = input("Digite 'S' adicionar mais um veiculo, ou digite qualquer"
+                                                " outra tecla para voltar ao menu principal:")
+                        sistema.adiciona_cliente(cliente_buscar, new_veiculo)
+                        if mais_um_veiculo.upper() != 'S':
+                            print('Retornando ao menu principal...', '\n')
+                            break
+                else:
+                    print('Cliente não encontrado no bando de dados!')
+            else:
+                print('Retornando ao menu principal...')
+        elif escolha == '8':  # Sair
+            print("Saindo...")
             break
         else:
             print('Opção escolhida é inválida!!')

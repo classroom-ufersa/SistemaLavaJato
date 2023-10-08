@@ -8,7 +8,7 @@ class Veiculo:
         self.status = 0 # Inicialmente não atendido
         self.cliente = cliente
         self.status = status
-        print(self.marca, self.modelo, 'adicionado a fila com sucesso!', sep=' ')
+        # print(self.marca, self.modelo, 'adicionado a fila com sucesso!', sep=' ')
     #Atende o veiculo
     def muda_status(self):
         self.status = 1
