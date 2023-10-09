@@ -1,7 +1,7 @@
 #include "veiculo.h"
 #include "../cliente/cliente.h"
 
-typedef struct veiculo
+struct veiculo
 {
     int id;
     char marca[100];
@@ -38,13 +38,14 @@ Veiculo *adicionarVeiculo(Veiculo *lista, Veiculo *veiculo)
     return veiculo;
 }
 
-Veiculo *AtenderVeiculo(Veiculo *v){
+Veiculo *AtenderVeiculo(Veiculo *v)
+{
 
     Veiculo *p;
-      for (p = v; p != NULL; p = p->prox)
+    for (p = v; p != NULL; p = p->prox)
     {
         if (p->placa == v->placa)
-        p->atendido = 1;
+            p->atendido = 1;
     }
 
     return (v);
@@ -81,11 +82,12 @@ void veiculo_imprime(Veiculo *v)
     }
 }
 
-Veiculo *buscarVeiculoPorPlaca(Veiculo *lista, char placa)
+Veiculo *buscarVeiculoPorPlaca(Veiculo *lista, char *placa)
 {
     while (lista != NULL)
     {
-        if (lista->placa == placa)
+        char *placa_veiculo = lista->placa; 
+        if (strcmp(placa_veiculo, placa) == 0)
         {
             return lista;
         }
@@ -135,7 +137,7 @@ Veiculo *vci_retira(Veiculo *v, char *placa)
     return v;
 }
 
-Veiculo *excluir_vci_cliente(Veiculo *v, int id, Cliente* cliente)
+Veiculo *excluir_vci_cliente(Veiculo *v, int id, Cliente *cliente)
 {
     Veiculo *ant = NULL;
     Veiculo *p = v;

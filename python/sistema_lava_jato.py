@@ -21,9 +21,13 @@ class SistemaLavaJato:
         if cliente in self.clientes:
             self.clientes.remove(cliente)
             print(f'Cliente {cliente.nome} removido da lista.')
-            for veiculo in self.veiculos_fila:
+            index = 0
+            while index < len(self.veiculos_fila):
+                veiculo = self.veiculos_fila[index]
                 if cliente.id == veiculo.cliente["id"]:
                     self.veiculos_fila.remove(veiculo)
+                else:
+                    index += 1
             return 1
         print('Cliente não encontrado na lista')
         return 0
