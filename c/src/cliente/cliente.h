@@ -1,9 +1,7 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../sistema/sistema.h"
 
 struct veiculo; // Declaração avançada da estrutura Veiculo
 typedef struct veiculo Veiculo;

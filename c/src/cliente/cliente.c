@@ -66,7 +66,7 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **t
             printf("5 - Higienizacao interna\n");
             printf("6 - Limpeza e hidratacao de couro\n");
 
-            scanf(" %c", &escolha);
+            escolha = le_opcao(OPCAO1,OPCAO6);
 
             switch (escolha)
             {
