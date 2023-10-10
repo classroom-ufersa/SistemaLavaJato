@@ -1,12 +1,12 @@
 #include "cliente.h"
 #include "../veiculo/veiculo.h"
 
-void limpar_buffer(void)
-{
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF)
-        ;
-}
+// void limpar_buffer(void)
+// {
+//     int c;
+//     while ((c = getchar()) != '\n' && c != EOF)
+//         ;
+// }
 
 struct cliente
 {
@@ -46,46 +46,42 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **t
     int qtd_veiculos = 0;
     char escolha;
     printf("Cadastro de veiculo\n");
-    while (adiciona_mais == 1)
+while (adiciona_mais == 1)
     {
         printf("Digite a marca:");
         scanf(" %[^\n]", marca);
+        limpar_buffer();
         printf("Digite o modelo:");
         scanf(" %[^\n]", modelo);
+        limpar_buffer();
         printf("Digite a placa do veiculo:");
         scanf(" %[^\n]", placa);
+        limpar_buffer();
         printf("Digite a cor:");
         scanf(" %[^\n]", cor);
+        limpar_buffer();
         while (1)
         {
-            printf("Escolha uma opcao:\n");
-            printf("1 - Lavagem simples\n");
-            printf("2 - Lavagem com enceramento\n");
-            printf("3 - Polimento\n");
-            printf("4 - Higienizacao de ar-condicionado\n");
-            printf("5 - Higienizacao interna\n");
-            printf("6 - Limpeza e hidratacao de couro\n");
-
-            escolha = le_opcao(OPCAO1,OPCAO6);
-
+            apresenta_menu(6, OPCAO1, TITULO_SERVICO_OPCAO1, TITULO_SERVICO_OPCAO2, TITULO_SERVICO_OPCAO3, TITULO_SERVICO_OPCAO4, TITULO_SERVICO_OPCAO4, TITULO_SERVICO_OPCAO5, TITULO_SERVICO_OPCAO6);
+            escolha = le_opcao(OPCAO1, OPCAO6);
             switch (escolha)
             {
-            case '1':
+            case OPCAO1:
                 strcpy(tipo_servico, "Lavagem simples");
                 break;
-            case '2':
+            case OPCAO2:
                 strcpy(tipo_servico, "Lavagem com enceramento");
                 break;
-            case '3':
+            case OPCAO3:
                 strcpy(tipo_servico, "Polimento");
                 break;
-            case '4':
+            case OPCAO4:
                 strcpy(tipo_servico, "Higienizacao de ar-condicionado");
                 break;
-            case '5':
+            case OPCAO5:
                 strcpy(tipo_servico, "Higienizacao interna");
                 break;
-            case '6':
+            case OPCAO6:
                 strcpy(tipo_servico, "Limpeza e hidratacao de couro");
                 break;
             default:
@@ -97,12 +93,13 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **t
         new_cliente->veiculo = adicionarVeiculo(new_cliente->veiculo, aux);
         *todos_veiculo = adicionarVeiculo(*todos_veiculo, aux);
         qtd_veiculos++;
-        printf("Deseja cadastrar mais um veiculo?(s/N)\n");
+        printf("Digite 'S' para cadastrar mais um veiculo, ou digite qualquer tecla para retornar ao menu principal.\n");
         char resposta;
         scanf(" %c", &resposta);
-        if (resposta != 's' || resposta != 'S')
-            adiciona_mais = 0;
         limpar_buffer();
+        resposta = toupper(resposta);
+        if (resposta != 'S')
+            adiciona_mais = 0;
     }
     /*Encandeia cliente*/
     if (ant == NULL) /* insere no inicio */

@@ -1,5 +1,12 @@
 #include "sistema.h"
 
+void limpar_buffer(void)
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+        ;
+}
+
 int le_opcao(int menor_valor, int maior_valor)
 {
     char op[100];

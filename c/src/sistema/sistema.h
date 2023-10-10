@@ -17,6 +17,13 @@
 #define TITULO_OPCAO7 "Finalizar atendimento"
 #define TITULO_OPCAO8 "Sair"
 
+#define TITULO_SERVICO_OPCAO1 "Lavagem simples"
+#define TITULO_SERVICO_OPCAO2 "Lavagem com enceramento"
+#define TITULO_SERVICO_OPCAO3 "Polimento"
+#define TITULO_SERVICO_OPCAO4 "Higienizacao de ar-condicionado"
+#define TITULO_SERVICO_OPCAO5 "Higienizacao interna"
+#define TITULO_SERVICO_OPCAO6 "Limpeza e hidratacao de couro"
+
 #define N_OPCOES 8
 #define OPCAO1 '1'
 #define OPCAO2 '2'
@@ -26,6 +33,8 @@
 #define OPCAO6 '6'
 #define OPCAO7 '7'
 #define OPCAO8 '8'
+
+void limpar_buffer(void);
 
 int le_opcao(int menor_valor, int maior_valor);
 
@@ -40,6 +49,5 @@ int gerar_id();
 void le_telefone(char *telefone, int tamanho_max);
 
 void formatar_telefone(const char *telefone);
-
 
 #endif // SISTEMA_H
