@@ -182,7 +182,6 @@ void salvar_clientes(const char *nome_arquivo, Cliente *lista_clientes)
         while (v != NULL)
         {
             fprintf(arquivo, "%d,%s,%s,%s,%d,%s,%s\n", v->id, v->marca, v->modelo, v->placa, v->atendido, v->cor, v->tipo_servico);
-
             v = v->prox;
         }
 
@@ -207,13 +206,13 @@ Cliente *carregar_clientes(const char *nome_arquivo, Veiculo **lista_veiculos)
     Cliente *c = NULL;
     Veiculo *v = NULL;
 
-    char linha[256];
+    char linha[500];
     while (fgets(linha, sizeof(linha), arquivo))
     {
         int id;
         char nome[81];
         char telefone[16];
-        if (sscanf(linha, "%d,%80[^,],%15[^,]", &id, nome, telefone) == 3)
+        if (sscanf(linha, "%d,%80[^,],%15[^,]", &id, nome, telefone) == 3 )
         {
             if (lista_clientes == NULL)
             {
@@ -241,27 +240,9 @@ Cliente *carregar_clientes(const char *nome_arquivo, Veiculo **lista_veiculos)
             {
                 if (c != NULL)
                 {
-                    if (c->veiculo == NULL)
-                    {
-                        c->veiculo = malloc(sizeof(Veiculo));
-                        v = c->veiculo;
-                    }
-                    else
-                    {
-                        v->prox = malloc(sizeof(Veiculo));
-                        v = v->prox;
-                    }
-
-                    // v->id = id;
-                    // strcpy(v->marca, marca);
-                    // strcpy(v->modelo, modelo);
-                    // strcpy(v->placa, placa);
-                    // v->atendido = atendido;
-                    // strcpy(v->cor, cor);
-                    // strcpy(v->tipo_servico, tipo_servico);
-                    // v->prox = NULL;
                     v = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, c, atendido);
                     *lista_veiculos = adicionarVeiculo(*lista_veiculos, v);
+                    v = v->prox;
                 }
             }
         }
@@ -270,3 +251,113 @@ Cliente *carregar_clientes(const char *nome_arquivo, Veiculo **lista_veiculos)
     fclose(arquivo);
     return lista_clientes;
 }
+
+// Cliente *carregar_clientes(const char *nome_arquivo, Veiculo **lista_veiculos)
+// {
+//     FILE *arquivo;
+//     arquivo = fopen(nome_arquivo, "r");
+//     if (arquivo == NULL)
+//     {
+//         perror("Erro ao abrir arquivo!\n");
+//         exit(1);
+//     }
+
+//     Cliente *lista_clientes = NULL;
+//     Cliente *cliente_atual = NULL;
+
+//     char linha[256];
+//     char *token;
+//     while (fgets(linha, sizeof(linha), arquivo))
+//     {
+//         token = strtok(linha, ",");
+//         if (token != NULL)
+//         {
+//             int id = atoi(token);
+//             char nome[81];
+//             char telefone[16];
+
+//             token = strtok(NULL, ",");
+//             if (token != NULL)
+//             {
+//                 strncpy(nome, token, sizeof(nome));
+
+//                 token = strtok(NULL, "\n");
+//                 if (token != NULL)
+//                 {
+//                     strncpy(telefone, token, sizeof(telefone));
+
+//                     if (lista_clientes == NULL)
+//                     {
+//                         lista_clientes = malloc(sizeof(Cliente));
+//                         cliente_atual = lista_clientes;
+//                     }
+//                     else
+//                     {
+//                         cliente_atual->prox = malloc(sizeof(Cliente));
+//                         cliente_atual = cliente_atual->prox;
+//                     }
+
+//                     cliente_atual->id = id;
+//                     strncpy(cliente_atual->nome, nome, sizeof(cliente_atual->nome));
+//                     strncpy(cliente_atual->telefone, telefone, sizeof(cliente_atual->telefone));
+//                     cliente_atual->veiculo = NULL;
+//                     cliente_atual->prox = NULL;
+//                 }
+//             }
+//         }
+//         else
+//         {
+//             token = strtok(NULL, ",");
+//             if (token != NULL)
+//             {
+//                 int id = atoi(token);
+//                 char marca[100], modelo[100], placa[12], cor[12], tipo_servico[100];
+
+//                 token = strtok(NULL, ",");
+//                 if (token != NULL)
+//                 {
+//                     strncpy(marca, token, sizeof(marca));
+
+//                     token = strtok(NULL, ",");
+//                     if (token != NULL)
+//                     {
+//                         strncpy(modelo, token, sizeof(modelo));
+
+//                         token = strtok(NULL, ",");
+//                         if (token != NULL)
+//                         {
+//                             strncpy(placa, token, sizeof(placa));
+
+//                             token = strtok(NULL, ",");
+//                             if (token != NULL)
+//                             {
+//                                 int atendido = atoi(token);
+
+//                                 token = strtok(NULL, ",");
+//                                 if (token != NULL)
+//                                 {
+//                                     strncpy(cor, token, sizeof(cor));
+
+//                                     token = strtok(NULL, "\n");
+//                                     if (token != NULL)
+//                                     {
+//                                         strncpy(tipo_servico, token, sizeof(tipo_servico));
+
+//                                         if (cliente_atual != NULL)
+//                                         {
+//                                             Veiculo *veiculo = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, cliente_atual, atendido);
+//                                             *lista_veiculos = adicionarVeiculo(*lista_veiculos, veiculo);
+//                                         }
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+
+//     fclose(arquivo);
+//     return lista_clientes;
+// }
