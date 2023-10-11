@@ -20,7 +20,7 @@ int main(void)
     char placa_case7[12];
 
     printf("Carregando lista de clientes...\n");
-    clientes = carregar_clientes("data.txt", &lista_Veiculos);
+    clientes = carregar_clientes("./data/clientes.txt","./data/veiculos.txt", &lista_Veiculos);
     do
     {
         apresenta_menu(N_OPCOES, OPCAO1, TITULO_OPCAO1, TITULO_OPCAO2, TITULO_OPCAO3, TITULO_OPCAO4, TITULO_OPCAO5, TITULO_OPCAO6, TITULO_OPCAO7, TITULO_OPCAO8);
@@ -108,9 +108,7 @@ int main(void)
         }
     } while (!saida);
 
-    char caminho[100];
-    strcpy(caminho, "./data.txt");
-    salvar_clientes(caminho, clientes);
+    salvar_clientes("./data/clientes.txt","./data/veiculos.txt" ,clientes, lista_Veiculos);
 
     free(clientes);
     free(veiculo);

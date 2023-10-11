@@ -52,8 +52,9 @@ void le_telefone(char *telefone, int tamanho_max);
 
 void formatar_telefone(const char *telefone);
 
-void salvar_clientes(const char *nome_arquivo, Cliente *lista_clientes);
+void salvar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Cliente *lista_clientes, Veiculo *lista_veiculos);
 
-Cliente *carregar_clientes(const char *nome_arquivo, Veiculo **lista_veiculos);
+Cliente *carregar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Veiculo **lista_veiculos);
+
 
 #endif // SISTEMA_H

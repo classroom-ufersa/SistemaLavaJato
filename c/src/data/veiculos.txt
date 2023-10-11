@@ -1,0 +1,8 @@
+66235701,Mercedes,bens,4f5g6s5,0,azul,Higienizacao interna
+
+66235701,Gipe,renegate,a1d5f2,0,vermelho,Lavagem simples
+
+75451033,volkswagen,gol,412vd,0,njr,Higienizacao de ar-condicionado
+
+58660893,fiat,uno,acb1234,0,azul,Higienizacao de ar-condicionado
+
