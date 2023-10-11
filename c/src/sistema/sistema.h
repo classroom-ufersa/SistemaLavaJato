@@ -35,26 +35,28 @@
 #define OPCAO6 '6'
 #define OPCAO7 '7'
 #define OPCAO8 '8'
-
+// Limpa buffer
 void limpar_buffer(void);
-
+// lê opção do menu e verifica se a entrada é valida
 int le_opcao(int menor_valor, int maior_valor);
-
+// Le um nome e verifica se a entrada é valida
 void le_nome(char *nome, int tamanho_max);
-
+/*Apresenta um menu de opções
+** @param n_itens: quantidade de opções a serem exibidas
+** @param menor_opção: menor opção a ser exibida ex: '0'
+*/
 void apresenta_menu(int n_itens, int menor_opcao, ...);
-
+// formata um nome corretamente
 void corrige_nome(char *nome);
-
+// gera um id unico de 8 digitos
 int gerar_id();
-
+// lê um telefone informado pelo usuario
 void le_telefone(char *telefone, int tamanho_max);
-
+// formata telefone
 void formatar_telefone(const char *telefone);
-
+// salva a lista de clientes e de veiculos em arquivos de texto
 void salvar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Cliente *lista_clientes, Veiculo *lista_veiculos);
-
+// carrega a lista de clientes e de veiculos em arquivos de texto
 Cliente *carregar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Veiculo **lista_veiculos);
-
 
 #endif // SISTEMA_H
