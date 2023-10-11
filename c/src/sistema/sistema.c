@@ -162,3 +162,114 @@ void formatar_telefone(const char *telefone)
         printf("Número de telefone inválido.\n");
     }
 }
+
+void salvar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Cliente *lista_clientes, Veiculo *lista_veiculos)
+{
+    FILE *arquivo_clientes;
+    arquivo_clientes = fopen(nome_arquivo_clientes, "w");
+    if (arquivo_clientes == NULL)
+    {
+        perror("Erro ao abrir arquivo de clientes!\n");
+        exit(1);
+    }
+
+    FILE *arquivo_veiculos;
+    arquivo_veiculos = fopen(nome_arquivo_veiculos, "w");
+    if (arquivo_veiculos == NULL)
+    {
+        perror("Erro ao abrir arquivo de veiculos!\n");
+        exit(1);
+    }
+
+    Cliente *p = lista_clientes; // variavel auxiliar para pecorrer lista
+    while (p != NULL)
+    {
+        fprintf(arquivo_clientes, "%d,%s,%s\n", p->id, p->nome, p->telefone);
+        p = p->prox;
+    }
+
+    Veiculo *v = lista_veiculos; // varaivel auxiliar para pecorrer a lista de veiculos de cada cliente
+    while (v != NULL)
+    {
+        fprintf(arquivo_veiculos, "%d,%s,%s,%s,%d,%s,%s\n", v->id, v->marca, v->modelo, v->placa, v->atendido, v->cor, v->tipo_servico);
+        v = v->prox;
+    }
+
+    fclose(arquivo_clientes);
+    fclose(arquivo_veiculos);
+}
+
+Cliente *carregar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Veiculo **lista_veiculos)
+{
+    FILE *arquivo_clientes;
+    arquivo_clientes = fopen(nome_arquivo_clientes, "r");
+    if (arquivo_clientes == NULL)
+    {
+        perror("Erro ao abrir arquivo de clientes!\n");
+        exit(1);
+    }
+
+    FILE *arquivo_veiculos;
+    arquivo_veiculos = fopen(nome_arquivo_veiculos, "r");
+    if (arquivo_veiculos == NULL)
+    {
+        perror("Erro ao abrir arquivo de veiculos!\n");
+        exit(1);
+    }
+
+    Cliente *lista_clientes = NULL;
+    Cliente *cliente_atual = NULL;
+
+    char linha[500];
+    while (fgets(linha, sizeof(linha), arquivo_clientes))
+    {
+        int id;
+        char nome[81];
+        char telefone[16];
+        if (sscanf(linha, "%d,%80[^,],%15[^,]", &id, nome, telefone) == 3)
+        {
+            if (lista_clientes == NULL)
+            {
+                lista_clientes = malloc(sizeof(Cliente));
+                cliente_atual = lista_clientes;
+            }
+            else
+            {
+                cliente_atual->prox = malloc(sizeof(Cliente));
+                cliente_atual = cliente_atual->prox;
+            }
+
+            cliente_atual->id = id;
+            strcpy(cliente_atual->nome, nome);
+            strcpy(cliente_atual->telefone, telefone);
+            cliente_atual->veiculo = NULL;
+            cliente_atual->prox = NULL;
+        }
+
+        while (fgets(linha, sizeof(linha), arquivo_veiculos))
+        {
+            int veiculo_id, atendido;
+            char marca[100], modelo[100], placa[12], cor[12], tipo_servico[100];
+            if (sscanf(linha, "%d,%99[^,],%99[^,],%11[^,],%d,%11[^,],%99[^,]", &veiculo_id, marca, modelo, placa, &atendido, cor, tipo_servico) == 7)
+            {
+
+                // Encontre o cliente correspondente
+                Cliente *cliente = lista_clientes;
+                while (cliente != NULL && cliente->id != veiculo_id)
+                {
+                    cliente = cliente->prox;
+                }
+
+                if (cliente_atual != NULL)
+                {
+                    Veiculo *veiculo = criarVeiculo(veiculo_id, modelo, tipo_servico, placa, marca, cor, cliente_atual, atendido);
+                    *lista_veiculos = adicionarVeiculo(*lista_veiculos, veiculo);
+                }
+            }
+        }
+    }
+
+    fclose(arquivo_clientes);
+    fclose(arquivo_veiculos);
+    return lista_clientes;
+}

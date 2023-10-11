@@ -89,7 +89,7 @@ while (adiciona_mais == 1)
             }
             break;
         }
-        Veiculo *aux = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, new_cliente);
+        Veiculo *aux = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, new_cliente, 0);
         new_cliente->veiculo = adicionarVeiculo(new_cliente->veiculo, aux);
         *todos_veiculo = adicionarVeiculo(*todos_veiculo, aux);
         qtd_veiculos++;

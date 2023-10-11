@@ -7,6 +7,8 @@
 #include <time.h>
 #include <ctype.h>
 #include <string.h>
+#include "../cliente/cliente.h"
+#include "../veiculo/veiculo.h"
 
 #define TITULO_OPCAO1 "Adicionar cliente"
 #define TITULO_OPCAO2 "Excluir cliente"
@@ -49,5 +51,10 @@ int gerar_id();
 void le_telefone(char *telefone, int tamanho_max);
 
 void formatar_telefone(const char *telefone);
+
+void salvar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Cliente *lista_clientes, Veiculo *lista_veiculos);
+
+Cliente *carregar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Veiculo **lista_veiculos);
+
 
 #endif // SISTEMA_H
