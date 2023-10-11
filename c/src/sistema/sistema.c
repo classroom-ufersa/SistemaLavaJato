@@ -162,3 +162,32 @@ void formatar_telefone(const char *telefone)
         printf("Número de telefone inválido.\n");
     }
 }
+
+void salvar_clientes(const char *nome_arquivo, Cliente *lista_clientes)
+{
+    FILE *arquivo;
+    arquivo = fopen(nome_arquivo, "w");
+    if (arquivo == NULL)
+    {
+        perror("Erro ao abrir arquivo!\n");
+        exit(1);
+    }
+
+    Cliente *p = lista_clientes; // variavel auxiliar para pecorrer lista
+    while (p != NULL)
+    {
+        fprintf(arquivo, "%d,%s,%s\n", p->id, p->nome, p->telefone);
+
+        Veiculo *v = p->veiculo; // varaivel auxiliar para pecorrer a lista de veiculos de cada cliente
+        while (v != NULL)
+        {
+            fprintf(arquivo, "%d,%s,%s,%s,%d,%s,%s\n", v->id, v->marca, v->modelo, v->placa, v->atendido, v->cor, v->tipo_servico);
+
+            v = v->prox;
+        }
+
+        p = p->prox;
+    }
+
+    fclose(arquivo);
+}

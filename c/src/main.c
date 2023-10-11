@@ -106,6 +106,10 @@ int main(void)
         }
     } while (!saida);
 
+    char caminho[100];
+    strcpy(caminho, "./data.txt");
+    salvar_clientes(caminho, clientes);
+
     free(clientes);
     free(veiculo);
     free(lista_Veiculos);
