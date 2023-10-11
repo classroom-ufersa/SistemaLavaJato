@@ -14,7 +14,7 @@ struct veiculo
     Veiculo *prox;
 };
 
-Veiculo *criarVeiculo(int id, char *modelo, char *tipo_servico, char *placa, char *marca, char *cor, Cliente *cliente)
+Veiculo *criarVeiculo(int id, char *modelo, char *tipo_servico, char *placa, char *marca, char *cor, Cliente *cliente, int atendido)
 {
     Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
     if (veiculo != NULL)
@@ -26,7 +26,7 @@ Veiculo *criarVeiculo(int id, char *modelo, char *tipo_servico, char *placa, cha
         strcpy(veiculo->marca, marca);
         strcpy(veiculo->cor, cor);
         veiculo->cliente = cliente;
-        veiculo->atendido = 0;
+        veiculo->atendido = atendido;
         veiculo->prox = NULL;
     }
     return veiculo;

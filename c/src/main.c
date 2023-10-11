@@ -19,6 +19,8 @@ int main(void)
     int id_case5;
     char placa_case7[12];
 
+    printf("Carregando lista de clientes...\n");
+    clientes = carregar_clientes("data.txt", &lista_Veiculos);
     do
     {
         apresenta_menu(N_OPCOES, OPCAO1, TITULO_OPCAO1, TITULO_OPCAO2, TITULO_OPCAO3, TITULO_OPCAO4, TITULO_OPCAO5, TITULO_OPCAO6, TITULO_OPCAO7, TITULO_OPCAO8);

@@ -8,7 +8,7 @@ typedef struct cliente Cliente;
 typedef struct veiculo Veiculo;
 
 //função que cria um veiculo fornecido pelo o usuario e cadastra
-Veiculo* criarVeiculo(int id, char* modelo, char* tipo_servico, char* placa, char* marca, char* cor, Cliente* cliente);
+Veiculo* criarVeiculo(int id, char* modelo, char* tipo_servico, char* placa, char* marca, char* cor, Cliente* cliente, int atendido);
 //função usada pra adicionar o veiculo
 Veiculo* adicionarVeiculo(Veiculo *lista, Veiculo *veiculo);
 //exibe os veiculos que ainda não foram atendidos 

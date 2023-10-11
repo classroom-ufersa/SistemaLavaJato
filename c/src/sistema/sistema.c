@@ -191,3 +191,82 @@ void salvar_clientes(const char *nome_arquivo, Cliente *lista_clientes)
 
     fclose(arquivo);
 }
+
+Cliente *carregar_clientes(const char *nome_arquivo, Veiculo **lista_veiculos)
+{
+    FILE *arquivo;
+    arquivo = fopen(nome_arquivo, "r");
+    if (arquivo == NULL)
+    {
+        perror("Erro ao abrir arquivo!\n");
+        exit(1);
+    }
+
+    Cliente *lista_clientes = NULL;
+    /*Variaveis que auxiliam a pecorrer a lista de clientes e a lista de veiculos*/
+    Cliente *c = NULL;
+    Veiculo *v = NULL;
+
+    char linha[256];
+    while (fgets(linha, sizeof(linha), arquivo))
+    {
+        int id;
+        char nome[81];
+        char telefone[16];
+        if (sscanf(linha, "%d,%80[^,],%15[^,]", &id, nome, telefone) == 3)
+        {
+            if (lista_clientes == NULL)
+            {
+                lista_clientes = malloc(sizeof(Cliente));
+                c = lista_clientes;
+            }
+            else
+            {
+                c->prox = malloc(sizeof(Cliente));
+                c = c->prox;
+            }
+
+            c->id = id;
+            strcpy(c->nome, nome);
+            strcpy(c->telefone, telefone);
+            c->veiculo = NULL;
+            c->prox = NULL;
+            v = NULL;
+        }
+        else
+        {
+            int id, atendido;
+            char marca[100], modelo[100], placa[12], cor[12], tipo_servico[100];
+            if (sscanf(linha, "%d,%99[^,],%99[^,],%11[^,],%d,%11[^,],%99[^,]", &id, marca, modelo, placa, &atendido, cor, tipo_servico) == 7)
+            {
+                if (c != NULL)
+                {
+                    if (c->veiculo == NULL)
+                    {
+                        c->veiculo = malloc(sizeof(Veiculo));
+                        v = c->veiculo;
+                    }
+                    else
+                    {
+                        v->prox = malloc(sizeof(Veiculo));
+                        v = v->prox;
+                    }
+
+                    // v->id = id;
+                    // strcpy(v->marca, marca);
+                    // strcpy(v->modelo, modelo);
+                    // strcpy(v->placa, placa);
+                    // v->atendido = atendido;
+                    // strcpy(v->cor, cor);
+                    // strcpy(v->tipo_servico, tipo_servico);
+                    // v->prox = NULL;
+                    v = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, c, atendido);
+                    *lista_veiculos = adicionarVeiculo(*lista_veiculos, v);
+                }
+            }
+        }
+    }
+
+    fclose(arquivo);
+    return lista_clientes;
+}
