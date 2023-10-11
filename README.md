@@ -2,8 +2,8 @@
 
 ## Desenvolvedores
 
-- CARLOS GABRIEL FERREIRA
-- FELIPE HIDEQUEL SANTOS DA SILVA
+- **CARLOS GABRIEL FERREIRA**
+- **FELIPE HIDEQUEL SANTOS DA SILVA**
 
 ## Problemática
 
@@ -23,7 +23,7 @@ Nesse cenário, a implementação de um sistema de lava-jato eficiente pode reso
 
 ## Funcionalidades
 
-O sistema oferece as seguintes funcionalidades:
+**O sistema oferece as seguintes funcionalidades:**
 
 1. **Adicionar Cliente:**  Permite registrar um novo cliente no sistema, incluindo informações como nome, veículo e detalhes de contato.
 
