@@ -52,7 +52,7 @@ Nesse cenário, a implementação de um sistema de lava-jato eficiente pode reso
 
 4. **Buscar Cliente:** Permite buscar um cliente com base em sua identificação, facilitando a localização de informações específicas.
 
-5. **Editar Informações de Cliente:** Permite editar as informações de um cliente, como nome, veículo ou detalhes de contato.
+5. **Editar Informações de Cliente:** Permite editar as informações de um cliente, como nome ou detalhes de contato.
 
 6. **Consultar Veículos em Serviço:** Mostra os veículos que estão atualmente em serviço no lava-jato, permitindo um acompanhamento em tempo real. Além disso é possivel registrar
    o atendimento de um veiculo na fila a partir desse submenu.
@@ -60,6 +60,8 @@ Nesse cenário, a implementação de um sistema de lava-jato eficiente pode reso
 7. **Adicionar Veículo de Cliente Já Cadastrado:** Permite associar um veículo a um cliente que já está cadastrado no sistema.
 
 8. **Sair:** Encerra o sistema.
+
+Em ambas as linguagens, o sistema registra os clientes ordenados por ordem alfabetica e ao finalizar a execução da API corretamente, os dados registrados durante o uso serão salvos em um arquivo de texto.
 
 ## Como Usar
 1. **Compile o código-fonte em C usando um compilador C compatível.**
