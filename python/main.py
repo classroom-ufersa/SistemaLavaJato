@@ -1,8 +1,11 @@
-from sistema_lava_jato import SistemaLavaJato
 import random
 import re
-from telefone import Telefone
-from arquivos import *
+
+from pastas.sistema_lava_jato import SistemaLavaJato
+from pastas.cliente import Cliente
+from pastas.veiculo import Veiculo
+from pastas.telefone import Telefone
+from pastas.arquivos import salvar_dados, carrega_dados
 
 
 def menu():
@@ -77,6 +80,8 @@ def cadastro_dados_cliente():
     while True:
         try:
             name = input('Digite o nome do cliente: ')
+            if len(name) == 0:
+                raise ValueError('Campo obrigatorio não preenchido')
             if re.search(r'[0-9!@#$%^&*(),.?":{}|<>]', name):
                 raise ValueError('Nome não deve conter números ou caracteres especiais. Entrada invalida.')
             break
@@ -97,8 +102,17 @@ def cadastro_dados_cliente():
 def cadastro_dados_veiculo(cliente):
     while True:
         print('Adicionando veiculo...')
-        marca = input('Digite a marca: ')
-        modelo = input('Digite o modelo: ')
+        while True:
+            try:
+                marca = input('Digite a marca: ')
+                if len(marca) == 0:
+                    raise ValueError('Campo obrigatorio não preenchido')
+                modelo = input('Digite o modelo: ')
+                if len(modelo) == 0:
+                    raise ValueError('Campo obrigatorio não preenchido')
+                break
+            except ValueError as error:
+                print(error)
         while True:
             try:
                 placa = input('Digite a placa : (sem pontuação)')
@@ -165,7 +179,7 @@ def editando_dados_cliente(cliente):
 
 if __name__ == '__main__':
     # carrega os dados empacotados em um arquivo json
-    clientes, veiculos_fila, veiculos_atendido, placas = carrega_dados('data.json')
+    clientes, veiculos_fila, veiculos_atendido, placas = carrega_dados('arquivos/data.json')
     # Cria instancia do sistema
     sistema = SistemaLavaJato()
     # inicializa os campos do sistema com os dados extraidos do dataset
@@ -238,4 +252,4 @@ if __name__ == '__main__':
         else:
             print('Opção escolhida é inválida!!')
     sistema.ordernar_clientes_por_nome()
-    salvar_dados(sistema, placas, 'data.json')
+    salvar_dados(sistema, placas, 'arquivos/data.json')
