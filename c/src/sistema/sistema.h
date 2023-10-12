@@ -53,7 +53,7 @@ int gerar_id();
 // lê um telefone informado pelo usuario
 void le_telefone(char *telefone, int tamanho_max);
 // formata telefone
-void formatar_telefone(const char *telefone);
+char* formatar_telefone(const char *telefone);
 // salva a lista de clientes e de veiculos em arquivos de texto
 void salvar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Cliente *lista_clientes, Veiculo *lista_veiculos);
 // carrega a lista de clientes e de veiculos em arquivos de texto
