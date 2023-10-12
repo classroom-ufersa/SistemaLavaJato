@@ -23,7 +23,7 @@ Nesse cenário, a implementação de um sistema de lava-jato eficiente pode reso
 
 ## Funcionalidades
 
-O sistema oferece as seguintes funcionalidades:
+### O sistema em C oferece as seguintes funcionalidades:
 
 1. **Adicionar Cliente:**  Permite registrar um novo cliente no sistema, incluindo informações como nome, veículo e detalhes de contato.
 
@@ -41,8 +41,27 @@ O sistema oferece as seguintes funcionalidades:
 
 8. **Sair:** Encerra o sistema.
 
-## Como Usar
 
+O sistema em Python oferece as seguintes funcionalidades:
+
+1. **Adicionar Cliente:** Permite registrar um novo cliente no sistema, incluindo informações como nome, veículo e detalhes de contato.
+
+2. **Excluir Cliente:** Permite remover um cliente da lista com base em sua identificação.
+
+3. **Listar Veículos Atendidos:** Apresenta uma lista de todos os veículos que foram atendidos pelo lava-jato, exibindo informações como o nome do proprietário e detalhes do veículo.
+
+4. **Buscar Cliente:** Permite buscar um cliente com base em sua identificação, facilitando a localização de informações específicas.
+
+5. **Editar Informações de Cliente:** Permite editar as informações de um cliente, como nome, veículo ou detalhes de contato.
+
+6. **Consultar Veículos em Serviço:** Mostra os veículos que estão atualmente em serviço no lava-jato, permitindo um acompanhamento em tempo real. Além disso é possivel registrar
+   o atendimento de um veiculo na fila a partir desse submenu.
+   
+7. **Adicionar Veículo de Cliente Já Cadastrado:** Permite associar um veículo a um cliente que já está cadastrado no sistema.
+
+8. **Sair:** Encerra o sistema.
+
+## Como Usar
 1. **Compile o código-fonte em C usando um compilador C compatível.**
 2. **Execute o programa resultante para acessar o sistema.**
 3. **Use as opções do menu para realizar as diversas operações do sistema de lava jato.**
