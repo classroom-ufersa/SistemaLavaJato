@@ -2,10 +2,10 @@
 
 ## Desenvolvedores
 
-- CARLOS GABRIEL FERREIRA
-- FELIPE HIDEQUEL SANTOS DA SILVA
+:man_student: Dev: [Felipe Hidequel Santos da Silva](https://github.com/felipehidequel). <br>
+:man_student: Dev: [Carlos Gabriel Ferreira](https://github.com/GabasDev). <br>
 
-## Problemática
+## :scroll: Problemática
 
 **Imagine um lava-jato operado manualmente, onde todas as informações sobre clientes, agendamentos e transações são registradas em papel ou em sistemas ultrapassados. Essa abordagem manual cria uma série de desafios que podem ser considerados:**
 
@@ -63,8 +63,21 @@ Nesse cenário, a implementação de um sistema de lava-jato eficiente pode reso
 
 Em ambas as linguagens, o sistema registra os clientes ordenados por ordem alfabetica e ao finalizar a execução da API corretamente, os dados registrados durante o uso serão salvos em um arquivo de texto.
 
-## Como Usar
-1. **Compile o código-fonte em C usando um compilador C compatível.**
-2. **Execute o programa resultante para acessar o sistema.**
-3. **Use as opções do menu para realizar as diversas operações do sistema de lava jato.**
+# :gear: Como Usar
+
+## Compilando e executando
+
+### C
+```shell
+   cd c
+   cd src
+   make main && mv main ../bin
+   cd bin
+   ./bin
+```
+### Python
+```shell
+   cd python
+   python3 main.py
+```
 
