@@ -168,7 +168,6 @@ void imprime_cliente(Cliente *c)
     for (p = c; p != NULL; p = p->prox)
     {
         printf("ID: %d\tNome: %s\tTelefone: %s\n", p->id, p->nome, p->telefone);
-        veiculo_imprime(p->veiculo);
     }
 }
 

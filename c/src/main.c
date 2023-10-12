@@ -18,9 +18,10 @@ int main(void)
     int id_case4;
     int id_case5;
     char placa_case7[12];
+    char *telefone_formatado;
 
     printf("Carregando lista de clientes...\n");
-    clientes = carregar_clientes("../data/clientes.txt","../data/veiculos.txt", &lista_Veiculos);
+    clientes = carregar_clientes("../data/clientes.txt", "../data/veiculos.txt", &lista_Veiculos);
     do
     {
         apresenta_menu(N_OPCOES, OPCAO1, TITULO_OPCAO1, TITULO_OPCAO2, TITULO_OPCAO3, TITULO_OPCAO4, TITULO_OPCAO5, TITULO_OPCAO6, TITULO_OPCAO7, TITULO_OPCAO8);
@@ -30,13 +31,17 @@ int main(void)
         case OPCAO1:
             le_nome(nome, sizeof(nome));
             corrige_nome(nome);
-            // printf("%s", nome);
-            // le_telefone(telefone, sizeof(telefone));
-            printf("Digite o numero de telefone: ");
-            scanf(" %s", telefone);
-            limpar_buffer();
+            while (formatar_telefone(telefone) == NULL)
+            {
+                printf("Digite o numero de telefone(somente numeros) (DDD)XXXXX-XXXX: ");
+                scanf(" %s", telefone);
+                limpar_buffer();
+                telefone_formatado = formatar_telefone(telefone);
+                if (telefone_formatado == NULL)
+                    printf("entrada invalida!\n");
+            }
             id = gerar_id();
-            clientes = add_cliente(clientes, nome, telefone, id, &lista_Veiculos);
+            clientes = add_cliente(clientes, nome, telefone_formatado, id, &lista_Veiculos);
             break;
         case OPCAO2:
             if (clientes != NULL)
@@ -70,7 +75,7 @@ int main(void)
 
             break;
         case OPCAO3:
-            imprime_cliente(clientes);
+            veiculo_imprime_atendidos(lista_Veiculos);
             break;
         case OPCAO4:
             printf("Insira o id do cliente que deseja buscar:\n");
@@ -81,17 +86,18 @@ int main(void)
             free(cliente_buscado);
             break;
         case OPCAO5:
-            printf("Insira o id do cliente que deseja buscar:\n");
+            imprime_cliente(clientes);
+            printf("Insira o id do cliente que deseja editar:\n");
             scanf("%d", &id_case5);
             limpar_buffer();
             cliente_buscado = busca_cliente(clientes, id_case5);
             clientes = editar_cliente(cliente_buscado, id_case5);
             break;
-            break;
         case OPCAO6:
             listarVeiculosNaoAtendidos(lista_Veiculos);
             break;
         case OPCAO7:
+            listarVeiculosNaoAtendidos(lista_Veiculos);
             printf("Informe a placa do veiculo: ");
             scanf(" %[^\n]", placa_case7);
             limpar_buffer();
@@ -108,7 +114,7 @@ int main(void)
         }
     } while (!saida);
 
-    salvar_clientes("../data/clientes.txt","../data/veiculos.txt" ,clientes, lista_Veiculos);
+    salvar_clientes("../data/clientes.txt", "../data/veiculos.txt", clientes, lista_Veiculos);
 
     free(clientes);
     free(veiculo);

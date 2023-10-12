@@ -149,18 +149,23 @@ void le_telefone(char *telefone, int tamanho_max)
     limpar_buffer();
 }
 
-void formatar_telefone(const char *telefone)
+char *formatar_telefone(const char *telefone)
 {
+
     if (strlen(telefone) == 11)
     {
         char ddd[3], numero[6], parte_final[5];
         sscanf(telefone, "%2s%5s%4s", ddd, numero, parte_final);
-        printf("+55 (%s) %s-%s\n", ddd, numero, parte_final);
+
+        // Alocar espaço para a string formatada
+        char *telefone_formatado = (char *)malloc(20); // Tamanho suficiente para a formatação
+
+        // Formatar o número
+        snprintf(telefone_formatado, 20, "+55 (%s) %s-%s", ddd, numero, parte_final);
+
+        return telefone_formatado;
     }
-    else
-    {
-        printf("Número de telefone inválido.\n");
-    }
+    return NULL;
 }
 
 void salvar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Cliente *lista_clientes, Veiculo *lista_veiculos)

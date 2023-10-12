@@ -60,9 +60,11 @@ void listarVeiculosNaoAtendidos(Veiculo *lista)
     {
         if (lista->atendido == 0)
         {
-            printf("ID: %d, Tipo de servico: %s, Marca: %s, Modelo: %s, Placa: %s\n",
+            printf("_______________________________________________________________________\n");
+            printf("ID: %d\nTipo de servico: %s\nMarca: %s\nModelo: %s\nPlaca: %s\n",
                    lista->id, lista->tipo_servico, lista->marca, lista->modelo, lista->placa);
             veiculoNaoAtendidoEncontrado = 1; // Um veículo não atendido foi encontrado
+            printf("_______________________________________________________________________\n");
         }
         lista = lista->prox;
     }
@@ -72,21 +74,27 @@ void listarVeiculosNaoAtendidos(Veiculo *lista)
         printf("Nenhum veiculo nao esta em servico.\n");
     }
 }
-void veiculo_imprime(Veiculo *v)
+void veiculo_imprime_atendidos(Veiculo *v)
 {
+    int algum_veiculo_foi_atendido = 0;
     Veiculo *p; // pecorrer a lista
-    printf("MARCA\tMODELO\tPLACA\tCOR\tSERVICO\n");
     for (p = v; p != NULL; p = p->prox)
     {
-        printf("%s\t%s\t%s\t%s\t%s - CLIENTE %s\n", p->marca, p->modelo, p->placa, p->cor, p->tipo_servico, p->cliente->nome);
+        if (p->atendido == 1)
+        {
+            printf("MARCA: %s\tMODELO: %s\tPLACA: %s\tCOR: %s\tSERVIÇO %s - CLIENTE %s\n", p->marca, p->modelo, p->placa, p->cor, p->tipo_servico, p->cliente->nome);
+            algum_veiculo_foi_atendido = 1;
+        }
     }
+    if (!algum_veiculo_foi_atendido)
+        printf("Nenhum Veiculo foi atendido!\n");
 }
 
 Veiculo *buscarVeiculoPorPlaca(Veiculo *lista, char *placa)
 {
     while (lista != NULL)
     {
-        char *placa_veiculo = lista->placa; 
+        char *placa_veiculo = lista->placa;
         if (strcmp(placa_veiculo, placa) == 0)
         {
             return lista;
