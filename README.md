@@ -73,7 +73,7 @@ Em ambas as linguagens, o sistema registra os clientes ordenados por ordem alfab
    cd src
    make main && mv main ../bin
    cd bin
-   ./bin
+   ./main
 ```
 ### Python
 ```shell
