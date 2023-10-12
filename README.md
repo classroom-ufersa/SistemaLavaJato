@@ -42,7 +42,7 @@ Nesse cenário, a implementação de um sistema de lava-jato eficiente pode reso
 8. **Sair:** Encerra o sistema.
 
 
-O sistema em Python oferece as seguintes funcionalidades:
+### O sistema em Python oferece as seguintes funcionalidades:
 
 1. **Adicionar Cliente:** Permite registrar um novo cliente no sistema, incluindo informações como nome, veículo e detalhes de contato.
 
