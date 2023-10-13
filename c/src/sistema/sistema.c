@@ -36,7 +36,6 @@ int le_opcao(int menor_valor, int maior_valor)
 */
 void le_nome(char *nome, int tamanho_max)
 {
-    printf("Digite um nome: ");
     if (fgets(nome, tamanho_max, stdin) != NULL)
     {
         // Remove a quebra de linha do final da string (se existir)
@@ -48,7 +47,7 @@ void le_nome(char *nome, int tamanho_max)
     }
     else
     {
-        printf("Erro na leitura do nome.\n");
+        printf("Erro na leitura.\n");
     }
     // limpar_buffer();
 }
@@ -161,7 +160,7 @@ char *formatar_telefone(const char *telefone)
         char *telefone_formatado = (char *)malloc(20); // Tamanho suficiente para a formatação
 
         // Formatar o número
-        snprintf(telefone_formatado, 20, "+55 (%s) %s-%s", ddd, numero, parte_final);
+        snprintf(telefone_formatado, 20, "+55(%s)%s-%s", ddd, numero, parte_final);
 
         return telefone_formatado;
     }
@@ -230,8 +229,8 @@ Cliente *carregar_clientes(const char *nome_arquivo_clientes, const char *nome_a
     {
         int id;
         char nome[81];
-        char telefone[16];
-        if (sscanf(linha, "%d,%80[^,],%15[^,]", &id, nome, telefone) == 3)
+        char telefone[20];
+        if (sscanf(linha, "%d,%80[^,],%19[^\n]", &id, nome, telefone) == 3)
         {
             if (lista_clientes == NULL)
             {
@@ -250,31 +249,67 @@ Cliente *carregar_clientes(const char *nome_arquivo_clientes, const char *nome_a
             cliente_atual->veiculo = NULL;
             cliente_atual->prox = NULL;
         }
+    }
 
-        while (fgets(linha, sizeof(linha), arquivo_veiculos))
+    rewind(arquivo_veiculos);
+    while (fgets(linha, sizeof(linha), arquivo_veiculos))
+    {
+        int veiculo_id, atendido;
+        char marca[100], modelo[100], placa[12], cor[12], tipo_servico[100];
+        if (sscanf(linha, "%d,%99[^,],%99[^,],%11[^,],%d,%11[^,],%99[^\n]", &veiculo_id, marca, modelo, placa, &atendido, cor, tipo_servico) == 7)
         {
-            int veiculo_id, atendido;
-            char marca[100], modelo[100], placa[12], cor[12], tipo_servico[100];
-            if (sscanf(linha, "%d,%99[^,],%99[^,],%11[^,],%d,%11[^,],%99[^,]", &veiculo_id, marca, modelo, placa, &atendido, cor, tipo_servico) == 7)
+            // Encontre o cliente correspondente
+            Cliente *cliente = lista_clientes;
+            while (cliente != NULL && cliente->id != veiculo_id)
             {
+                cliente = cliente->prox;
+            }
 
-                // Encontre o cliente correspondente
-                Cliente *cliente = lista_clientes;
-                while (cliente != NULL && cliente->id != veiculo_id)
-                {
-                    cliente = cliente->prox;
-                }
-
-                if (cliente_atual != NULL)
-                {
-                    Veiculo *veiculo = criarVeiculo(veiculo_id, modelo, tipo_servico, placa, marca, cor, cliente_atual, atendido);
-                    *lista_veiculos = adicionarVeiculo(*lista_veiculos, veiculo);
-                }
+            if (cliente != NULL)
+            {
+                Veiculo *veiculo = criarVeiculo(veiculo_id, modelo, tipo_servico, placa, marca, cor, cliente, atendido);
+                *lista_veiculos = adicionarVeiculo(*lista_veiculos, veiculo);
             }
         }
     }
 
     fclose(arquivo_clientes);
     fclose(arquivo_veiculos);
+
     return lista_clientes;
+}
+
+
+char *formatar_placa(const char *placa)
+{
+    // Usar uma expressão regular para validar a placa
+    regex_t regex;
+    if (regcomp(&regex, "^[A-Z]{3}[0-9][0-9A-Z][0-9]{2}$", REG_EXTENDED) != 0)
+    {
+        // Se a expressão regular não pôde ser compilada, retorne NULL
+        return NULL;
+    }
+
+    if (regexec(&regex, placa, 0, NULL, 0) == 0)
+    {
+        // A placa é válida, podemos formatá-la
+        char parte1[4], parte2[2], parte3[3], parte4[3];
+        sscanf(placa, "%3s%1s%2s%2s", parte1, parte2, parte3, parte4);
+
+        // Alocar espaço para a string formatada
+        char *placa_formatada = (char *)malloc(13); // Tamanho suficiente para a formatação
+
+        // Formatar a placa
+        snprintf(placa_formatada, 13, "%s-%s%s%s", parte1, parte2, parte3, parte4);
+
+        // Liberar a expressão regular
+        regfree(&regex);
+
+        return placa_formatada;
+    }
+
+    // Liberar a expressão regular
+    regfree(&regex);
+
+    return NULL;
 }

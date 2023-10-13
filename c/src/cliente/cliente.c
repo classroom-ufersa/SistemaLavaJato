@@ -43,20 +43,27 @@ Cliente *add_cliente(Cliente *c, char *nome, char *telefone, int id, Veiculo **t
     char placa[12];
     char cor[12];
     char tipo_servico[100];
-    int qtd_veiculos = 0;
+    char *placa_formatada;
     char escolha;
     printf("Cadastro de veiculo\n");
-while (adiciona_mais == 1)
+    while (adiciona_mais == 1)
     {
-        printf("Digite a marca:");
-        scanf(" %[^\n]", marca);
-        limpar_buffer();
-        printf("Digite o modelo:");
-        scanf(" %[^\n]", modelo);
-        limpar_buffer();
-        printf("Digite a placa do veiculo:");
-        scanf(" %[^\n]", placa);
-        limpar_buffer();
+        printf("Digite a marca: ");
+        le_nome(marca, sizeof(marca));
+        corrige_nome(marca);
+        printf("Digite o modelo: ");
+        le_nome(modelo, sizeof(modelo));
+        corrige_nome(modelo);
+
+        while (formatar_placa(placa) == NULL)
+        {
+            printf("Digite a placa do veiculo:");
+            scanf(" %[^\n]", placa);
+            limpar_buffer();
+            placa_formatada = formatar_placa(placa);
+            if (placa_formatada == NULL)
+                printf("Entrada invalida!\n");
+        }
         printf("Digite a cor:");
         scanf(" %[^\n]", cor);
         limpar_buffer();
@@ -92,7 +99,6 @@ while (adiciona_mais == 1)
         Veiculo *aux = criarVeiculo(id, modelo, tipo_servico, placa, marca, cor, new_cliente, 0);
         new_cliente->veiculo = adicionarVeiculo(new_cliente->veiculo, aux);
         *todos_veiculo = adicionarVeiculo(*todos_veiculo, aux);
-        qtd_veiculos++;
         printf("Digite 'S' para cadastrar mais um veiculo, ou digite qualquer tecla para retornar ao menu principal.\n");
         char resposta;
         scanf(" %c", &resposta);
@@ -171,28 +177,37 @@ void imprime_cliente(Cliente *c)
     }
 }
 
-
-Cliente *editar_cliente(Cliente *c, int id)
+void editar_cliente(Cliente *c, int id)
 {
     Cliente *atual = c;
 
     // Percorrer a lista de clientes
     while (atual != NULL)
     {
+        char telefone[20];
+        char *telefone_formatado;
         if (atual->id == id)
         {
             // Se encontrarmos o cliente com o ID desejado, permitimos a edição das informações
             printf("Digite o novo nome para o cliente: \n");
-            scanf("%s", atual->nome);
-            printf("Digite o novo telefone : \n");
-            scanf("%s", atual->telefone);
-            // Outras operações de edição de informações do cliente podem ser adicionadas aqui
+            le_nome(atual->nome, sizeof(atual->nome));
+            corrige_nome(atual->nome);            
+            while (formatar_telefone(telefone) == NULL)
+            {
+                printf("Digite o numero de telefone(somente numeros) (DDD)XXXXX-XXXX: ");
+                scanf(" %s", telefone);
+                limpar_buffer();
+                telefone_formatado = formatar_telefone(telefone);
+                if (telefone_formatado == NULL)
+                    printf("entrada invalida!\n");
+            }
+            strcpy(atual->telefone, telefone_formatado);
 
-            return c; // Retorna o ponteiro original para a lista de clientes com as edições feitas
+            // return c; // Retorna o ponteiro original para a lista de clientes com as edições feitas
         }
         atual = atual->prox;
     }
 
     // Se o cliente com o ID desejado não for encontrado, retornamos a lista original
-    return c;
+    // return c;
 }

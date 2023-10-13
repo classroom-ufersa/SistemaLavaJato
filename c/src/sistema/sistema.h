@@ -9,6 +9,7 @@
 #include <string.h>
 #include "../cliente/cliente.h"
 #include "../veiculo/veiculo.h"
+#include <regex.h>
 
 #define TITULO_OPCAO1 "Adicionar cliente"
 #define TITULO_OPCAO2 "Excluir cliente"
@@ -58,5 +59,7 @@ char* formatar_telefone(const char *telefone);
 void salvar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Cliente *lista_clientes, Veiculo *lista_veiculos);
 // carrega a lista de clientes e de veiculos em arquivos de texto
 Cliente *carregar_clientes(const char *nome_arquivo_clientes, const char *nome_arquivo_veiculos, Veiculo **lista_veiculos);
+// Formata placa de veiculo utilizando expressão regular
+char *formatar_placa(const char *placa);
 
 #endif // SISTEMA_H
