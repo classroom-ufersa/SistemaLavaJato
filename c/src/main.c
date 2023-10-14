@@ -122,12 +122,17 @@ int main(void)
             listarVeiculosNaoAtendidos(lista_Veiculos);
             break;
         case OPCAO7: // REGISTRAR ATENDIMENTO DE VEICULO
-            listarVeiculosNaoAtendidos(lista_Veiculos);
-            printf("Informe a placa do veiculo: ");
-            scanf(" %[^\n]", placa_case7);
-            limpar_buffer();
-            veiculo = buscarVeiculoPorPlaca(veiculo, placa_case7);
-            lista_Veiculos = AtenderVeiculo(veiculo);
+            if (listarVeiculosNaoAtendidos(lista_Veiculos))
+            {
+                printf("Informe a placa do veiculo: ");
+                scanf(" %[^\n]", placa_case7);
+                limpar_buffer();
+                veiculo = buscarVeiculoPorPlaca(lista_Veiculos, placa_case7);
+                if (veiculo)
+                    lista_Veiculos = AtenderVeiculo(lista_Veiculos, veiculo);
+                else
+                    printf("Veiculo não encontrado!");
+            }
             break;
         case OPCAO8: // SAIR
             printf("Saindo do programa. Ate logo!\n");

@@ -12,7 +12,7 @@ Veiculo* criarVeiculo(int id, char* modelo, char* tipo_servico, char* placa, cha
 //função usada pra adicionar o veiculo
 Veiculo* adicionarVeiculo(Veiculo *lista, Veiculo *veiculo);
 //exibe os veiculos que ainda não foram atendidos 
-void listarVeiculosNaoAtendidos(Veiculo *lista);
+int listarVeiculosNaoAtendidos(Veiculo *lista);
 //busca o veiculo pela a placa
 Veiculo *buscarVeiculoPorPlaca(Veiculo *lista, char *placa);
 //libera a lista de veiculos
@@ -24,7 +24,7 @@ Veiculo *vci_retira(Veiculo *v, char *placa);
 //exclui o veiculo do cliente
 Veiculo *excluir_vci_cliente(Veiculo *v, int id, Cliente* cliente);
 //finaliza o atendimento do cliente
-Veiculo *AtenderVeiculo(Veiculo *v);
+Veiculo *AtenderVeiculo(Veiculo *lista_veiculos, Veiculo *v);
 // imprime os campos de uma lista de veiculos atendidos
 void veiculo_imprime_atendidos(Veiculo *v);
 
