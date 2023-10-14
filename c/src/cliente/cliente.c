@@ -151,12 +151,20 @@ Cliente *excluir_cliente(Cliente *c, int id)
 
 Cliente *busca_cliente(Cliente *c, int id)
 {
+    Cliente *cliente_buscado = (Cliente*)malloc(sizeof(Cliente));
     Cliente *p;
     for (p = c; p != NULL; p = p->prox)
     {
         if (p->id == id)
-            return p;
+        {
+            cliente_buscado->id = p->id;
+            strcpy(cliente_buscado->nome, p->nome);
+            strcpy(cliente_buscado->telefone, p->telefone);
+            cliente_buscado->prox = NULL;
+            return cliente_buscado;
+        }
     }
+
     return NULL;
 }
 
@@ -191,7 +199,7 @@ void editar_cliente(Cliente *c, int id)
             // Se encontrarmos o cliente com o ID desejado, permitimos a edição das informações
             printf("Digite o novo nome para o cliente: \n");
             le_nome(atual->nome, sizeof(atual->nome));
-            corrige_nome(atual->nome);            
+            corrige_nome(atual->nome);
             while (formatar_telefone(telefone) == NULL)
             {
                 printf("Digite o numero de telefone(somente numeros) (DDD)XXXXX-XXXX: ");

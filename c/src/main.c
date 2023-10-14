@@ -78,11 +78,25 @@ int main(void)
             veiculo_imprime_atendidos(lista_Veiculos);
             break;
         case OPCAO4: // BUSCAR CLIENTE
-            printf("Insira o id do cliente que deseja buscar:\n");
-            scanf("%d", &id_case4);
-            limpar_buffer();
-            cliente_buscado = busca_cliente(clientes, id_case4);
-            imprime_cliente(cliente_buscado);
+            if (!lst_cliente_vazia(clientes))
+            {
+                printf("Insira o id do cliente que deseja buscar:\n");
+                while (scanf("%d", &id_case4) != 1)
+                {
+                    printf("Entrada inválida. O ID deve ser um número: \n");
+                    limpar_buffer();
+                }
+                cliente_buscado = busca_cliente(clientes, id_case4);
+                if (cliente_buscado)
+                    imprime_cliente(cliente_buscado);
+                else
+                    printf("Cliente não encontrando.\n");
+                free(cliente_buscado);
+            }
+            else
+            {
+                printf("Lista de clientes vazia!\n");
+            }
             break;
         case OPCAO5: // EDITAR INFORMAÇÕES DE CLIENTE
             if (clientes != NULL)
