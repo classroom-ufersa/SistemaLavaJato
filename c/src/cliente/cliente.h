@@ -21,7 +21,7 @@ int lst_cliente_vazia(Cliente *l);
 /* Imprime uma lista de clientes */
 void imprime_cliente(Cliente *c);
 //função que edita as informações do cliente
-void editar_cliente(Cliente *c, int id);
+void editar_cliente(Cliente **c, int id);
 // Cliente *editar_cliente(Cliente *c, int id);
 //gera um id aleatorio para cada usuario
 int gerarId();

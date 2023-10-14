@@ -151,7 +151,7 @@ Cliente *excluir_cliente(Cliente *c, int id)
 
 Cliente *busca_cliente(Cliente *c, int id)
 {
-    Cliente *cliente_buscado = (Cliente*)malloc(sizeof(Cliente));
+    Cliente *cliente_buscado = (Cliente *)malloc(sizeof(Cliente));
     Cliente *p;
     for (p = c; p != NULL; p = p->prox)
     {
@@ -185,37 +185,106 @@ void imprime_cliente(Cliente *c)
     }
 }
 
-void editar_cliente(Cliente *c, int id)
+// void editar_cliente(Cliente *c, int id)
+// {
+//     Cliente *atual = c;
+
+//     // Percorrer a lista de clientes
+//     while (atual != NULL)
+//     {
+//         char telefone[20];
+//         char *telefone_formatado;
+//         if (atual->id == id)
+//         {
+//             // Se encontrarmos o cliente com o ID desejado, permitimos a edição das informações
+//             printf("Digite o novo nome para o cliente: \n");
+//             le_nome(atual->nome, sizeof(atual->nome));
+//             corrige_nome(atual->nome);
+//             while (formatar_telefone(telefone) == NULL)
+//             {
+//                 printf("Digite o numero de telefone(somente numeros) (DDD)XXXXX-XXXX: ");
+//                 scanf(" %s", telefone);
+//                 limpar_buffer();
+//                 telefone_formatado = formatar_telefone(telefone);
+//                 if (telefone_formatado == NULL)
+//                     printf("entrada invalida!\n");
+//             }
+//             strcpy(atual->telefone, telefone_formatado);
+//         }
+//         atual = atual->prox;
+//     }
+// }
+
+void editar_cliente(Cliente **c, int id)
 {
-    Cliente *atual = c;
+    Cliente *atual = *c;
+    Cliente *ant = NULL;
 
-    // Percorrer a lista de clientes
-    while (atual != NULL)
+    // Procurar o cliente na lista
+    while (atual != NULL && atual->id != id)
     {
-        char telefone[20];
-        char *telefone_formatado;
-        if (atual->id == id)
-        {
-            // Se encontrarmos o cliente com o ID desejado, permitimos a edição das informações
-            printf("Digite o novo nome para o cliente: \n");
-            le_nome(atual->nome, sizeof(atual->nome));
-            corrige_nome(atual->nome);
-            while (formatar_telefone(telefone) == NULL)
-            {
-                printf("Digite o numero de telefone(somente numeros) (DDD)XXXXX-XXXX: ");
-                scanf(" %s", telefone);
-                limpar_buffer();
-                telefone_formatado = formatar_telefone(telefone);
-                if (telefone_formatado == NULL)
-                    printf("entrada invalida!\n");
-            }
-            strcpy(atual->telefone, telefone_formatado);
-
-            // return c; // Retorna o ponteiro original para a lista de clientes com as edições feitas
-        }
+        ant = atual;
         atual = atual->prox;
     }
 
-    // Se o cliente com o ID desejado não for encontrado, retornamos a lista original
-    // return c;
+    // Se o cliente foi encontrado
+    if (atual)
+    {
+        char novo_nome[81];
+        char telefone[20];
+        char *telefone_formatado;
+
+        // Solicitar o novo nome
+        printf("Digite o novo nome para o cliente: \n");
+        le_nome(novo_nome, sizeof(novo_nome));
+        corrige_nome(novo_nome);
+
+        // Remover o cliente da lista original
+        if (ant == NULL)
+        {
+            *c = atual->prox;
+        }
+        else
+        {
+            ant->prox = atual->prox;
+        }
+
+        // Atualizar as informações do cliente
+        strcpy(atual->nome, novo_nome);
+
+        // Reordenar o cliente na lista, mantendo a ordem alfabética
+        Cliente *novo = *c;
+        Cliente *anterior = NULL;
+
+        while (novo != NULL && strcmp(novo->nome, atual->nome) < 0)
+        {
+            anterior = novo;
+            novo = novo->prox;
+        }
+
+        // Se o novo cliente for o primeiro da lista
+        if (anterior == NULL)
+        {
+            atual->prox = *c;
+            *c = atual;
+        }
+        else
+        {
+            anterior->prox = atual;
+            atual->prox = novo;
+        }
+
+        while (formatar_telefone(telefone) == NULL)
+        {
+            printf("Digite o numero de telefone(somente numeros) (DDD)XXXXX-XXXX: ");
+            scanf(" %s", telefone);
+            limpar_buffer();
+            telefone_formatado = formatar_telefone(telefone);
+            if (telefone_formatado == NULL)
+                printf("entrada invalida!\n");
+        }
+        strcpy(atual->telefone, telefone_formatado);
+
+        printf("Cliente editado com sucesso!\n");
+    }
 }

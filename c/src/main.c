@@ -107,8 +107,11 @@ int main(void)
                 scanf("%d", &id_case5);
                 limpar_buffer();
                 cliente_buscado = busca_cliente(clientes, id_case5);
-                if (cliente_buscado != NULL)
-                    editar_cliente(cliente_buscado, id_case5); // TODO: RESOLVER ISSO AQUI
+                if (cliente_buscado)
+                {
+                    editar_cliente(&clientes, id_case5);
+                    free(cliente_buscado);
+                }
                 else
                     printf("Usuario não encontrado!\n");
             }
