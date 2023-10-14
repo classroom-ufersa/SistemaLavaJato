@@ -2,10 +2,10 @@
 
 ## Desenvolvedores
 
-- CARLOS GABRIEL FERREIRA
-- FELIPE HIDEQUEL SANTOS DA SILVA
+:man_student: Dev: [Felipe Hidequel Santos da Silva](https://github.com/felipehidequel). <br>
+:man_student: Dev: [Carlos Gabriel Ferreira](https://github.com/GabasDev). <br>
 
-## Problemática
+## :scroll: Problemática
 
 **Imagine um lava-jato operado manualmente, onde todas as informações sobre clientes, agendamentos e transações são registradas em papel ou em sistemas ultrapassados. Essa abordagem manual cria uma série de desafios que podem ser considerados:**
 
@@ -23,7 +23,7 @@ Nesse cenário, a implementação de um sistema de lava-jato eficiente pode reso
 
 ## Funcionalidades
 
-O sistema oferece as seguintes funcionalidades:
+### O sistema em C oferece as seguintes funcionalidades:
 
 1. **Adicionar Cliente:**  Permite registrar um novo cliente no sistema, incluindo informações como nome, veículo e detalhes de contato.
 
@@ -41,9 +41,43 @@ O sistema oferece as seguintes funcionalidades:
 
 8. **Sair:** Encerra o sistema.
 
-## Como Usar
 
-1. **Compile o código-fonte em C usando um compilador C compatível.**
-2. **Execute o programa resultante para acessar o sistema.**
-3. **Use as opções do menu para realizar as diversas operações do sistema de lava jato.**
+### O sistema em Python oferece as seguintes funcionalidades:
+
+1. **Adicionar Cliente:** Permite registrar um novo cliente no sistema, incluindo informações como nome, veículo e detalhes de contato.
+
+2. **Excluir Cliente:** Permite remover um cliente da lista com base em sua identificação.
+
+3. **Listar Veículos Atendidos:** Apresenta uma lista de todos os veículos que foram atendidos pelo lava-jato, exibindo informações como o nome do proprietário e detalhes do veículo.
+
+4. **Buscar Cliente:** Permite buscar um cliente com base em sua identificação, facilitando a localização de informações específicas.
+
+5. **Editar Informações de Cliente:** Permite editar as informações de um cliente, como nome ou detalhes de contato.
+
+6. **Consultar Veículos em Serviço:** Mostra os veículos que estão atualmente em serviço no lava-jato, permitindo um acompanhamento em tempo real. Além disso é possivel registrar
+   o atendimento de um veiculo na fila a partir desse submenu.
+   
+7. **Adicionar Veículo de Cliente Já Cadastrado:** Permite associar um veículo a um cliente que já está cadastrado no sistema.
+
+8. **Sair:** Encerra o sistema.
+
+Em ambas as linguagens, o sistema registra os clientes ordenados por ordem alfabetica e ao finalizar a execução da API corretamente, os dados registrados durante o uso serão salvos em um arquivo de texto.
+
+# :gear: Como Usar
+
+## Compilando e executando
+
+### C
+```shell
+   cd c
+   cd src
+   make main && mv main ../bin
+   cd bin
+   ./main
+```
+### Python
+```shell
+   cd python
+   python3 main.py
+```
 

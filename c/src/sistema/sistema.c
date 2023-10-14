@@ -160,7 +160,11 @@ char *formatar_telefone(const char *telefone)
         char *telefone_formatado = (char *)malloc(20); // Tamanho suficiente para a formatação
 
         // Formatar o número
+<<<<<<< HEAD
         snprintf(telefone_formatado, 20, "+55(%s)%s-%s", ddd, numero, parte_final);
+=======
+        snprintf(telefone_formatado, 20, "+55 (%s) %s-%s", ddd, numero, parte_final);
+>>>>>>> main
 
         return telefone_formatado;
     }

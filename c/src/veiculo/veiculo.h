@@ -24,7 +24,11 @@ Veiculo *vci_retira(Veiculo *v, char *placa);
 //exclui o veiculo do cliente
 Veiculo *excluir_vci_cliente(Veiculo *v, int id, Cliente* cliente);
 //finaliza o atendimento do cliente
+<<<<<<< HEAD
 Veiculo *AtenderVeiculo(Veiculo *lista_veiculos, Veiculo *v);
+=======
+Veiculo *AtenderVeiculo(Veiculo *v);
+>>>>>>> main
 // imprime os campos de uma lista de veiculos atendidos
 void veiculo_imprime_atendidos(Veiculo *v);
 
