@@ -38,20 +38,23 @@ Veiculo *adicionarVeiculo(Veiculo *lista, Veiculo *veiculo)
     return veiculo;
 }
 
-Veiculo *AtenderVeiculo(Veiculo *v)
+Veiculo *AtenderVeiculo(Veiculo *lista_veiculos, Veiculo *v)
 {
 
     Veiculo *p;
-    for (p = v; p != NULL; p = p->prox)
+    for (p = lista_veiculos; p != NULL; p = p->prox)
     {
-        if (p->placa == v->placa)
+        if (strcmp(p->placa, v->placa) == 0)
+        {
             p->atendido = 1;
+            printf("Veiculo atendido!\n");
+            return lista_veiculos;
+        }
     }
-
-    return (v);
+    return lista_veiculos;
 }
 
-void listarVeiculosNaoAtendidos(Veiculo *lista)
+int listarVeiculosNaoAtendidos(Veiculo *lista)
 {
     int veiculoNaoAtendidoEncontrado = 0; // Variável de controle
 
@@ -71,8 +74,10 @@ void listarVeiculosNaoAtendidos(Veiculo *lista)
 
     if (!veiculoNaoAtendidoEncontrado)
     {
-        printf("Nenhum veiculo nao esta em servico.\n");
+        printf("Nenhum veiculo está em servico.\n\n");
+        return 0;
     }
+    return 1;
 }
 void veiculo_imprime_atendidos(Veiculo *v)
 {
@@ -92,12 +97,22 @@ void veiculo_imprime_atendidos(Veiculo *v)
 
 Veiculo *buscarVeiculoPorPlaca(Veiculo *lista, char *placa)
 {
+    Veiculo *veiculo_buscado = (Veiculo *)malloc(sizeof(Veiculo));
     while (lista != NULL)
     {
         char *placa_veiculo = lista->placa;
         if (strcmp(placa_veiculo, placa) == 0)
         {
-            return lista;
+            veiculo_buscado->id = lista->id;
+            strcpy(veiculo_buscado->modelo, lista->modelo);
+            strcpy(veiculo_buscado->tipo_servico, lista->tipo_servico);
+            strcpy(veiculo_buscado->placa, lista->placa);
+            strcpy(veiculo_buscado->marca, lista->marca);
+            strcpy(veiculo_buscado->cor, lista->cor);
+            veiculo_buscado->cliente = lista->cliente;
+            veiculo_buscado->atendido = lista->atendido;
+            veiculo_buscado->prox = NULL;
+            return veiculo_buscado;
         }
         lista = lista->prox;
     }

@@ -28,7 +28,8 @@ int main(void)
         op = le_opcao(OPCAO1, OPCAO1 + N_OPCOES - 1);
         switch (op)
         {
-        case OPCAO1:
+        case OPCAO1: // ADICIONAR CLIENTE
+            printf("Digite um nome: ");
             le_nome(nome, sizeof(nome));
             corrige_nome(nome);
             while (formatar_telefone(telefone) == NULL)
@@ -43,7 +44,7 @@ int main(void)
             id = gerar_id();
             clientes = add_cliente(clientes, nome, telefone_formatado, id, &lista_Veiculos);
             break;
-        case OPCAO2:
+        case OPCAO2: // EXLUIR CLIENTE
             if (clientes != NULL)
             {
                 imprime_cliente(clientes);
@@ -72,8 +73,68 @@ int main(void)
             {
                 printf("Lista de clientes vazia!\n");
             }
-
             break;
+        case OPCAO3: // LISTAR VEICULOS ATENDIDOS
+            veiculo_imprime_atendidos(lista_Veiculos);
+            break;
+        case OPCAO4: // BUSCAR CLIENTE
+            if (!lst_cliente_vazia(clientes))
+            {
+                printf("Insira o id do cliente que deseja buscar:\n");
+                while (scanf("%d", &id_case4) != 1)
+                {
+                    printf("Entrada inválida. O ID deve ser um número: \n");
+                    limpar_buffer();
+                }
+                cliente_buscado = busca_cliente(clientes, id_case4);
+                if (cliente_buscado)
+                    imprime_cliente(cliente_buscado);
+                else
+                    printf("Cliente não encontrando.\n");
+                free(cliente_buscado);
+            }
+            else
+            {
+                printf("Lista de clientes vazia!\n");
+            }
+            break;
+        case OPCAO5: // EDITAR INFORMAÇÕES DE CLIENTE
+            if (clientes != NULL)
+            {
+
+                imprime_cliente(clientes);
+                printf("Insira o id do cliente que deseja editar:\n");
+                scanf("%d", &id_case5);
+                limpar_buffer();
+                cliente_buscado = busca_cliente(clientes, id_case5);
+                if (cliente_buscado)
+                {
+                    editar_cliente(&clientes, id_case5);
+                    free(cliente_buscado);
+                }
+                else
+                    printf("Usuario não encontrado!\n");
+            }
+            else
+                printf("Lista de clientes vazia!");
+            break;
+<<<<<<< HEAD
+        case OPCAO6: // LISTA VEICULOS NÃO ATENDIDOS
+            listarVeiculosNaoAtendidos(lista_Veiculos);
+            break;
+        case OPCAO7: // REGISTRAR ATENDIMENTO DE VEICULO
+            if (listarVeiculosNaoAtendidos(lista_Veiculos))
+            {
+                printf("Informe a placa do veiculo: ");
+                scanf(" %[^\n]", placa_case7);
+                limpar_buffer();
+                veiculo = buscarVeiculoPorPlaca(lista_Veiculos, placa_case7);
+                if (veiculo)
+                    lista_Veiculos = AtenderVeiculo(lista_Veiculos, veiculo);
+                else
+                    printf("Veiculo não encontrado!");
+            }
+=======
         case OPCAO3:
             veiculo_imprime_atendidos(lista_Veiculos);
             break;
@@ -103,8 +164,9 @@ int main(void)
             limpar_buffer();
             veiculo = buscarVeiculoPorPlaca(veiculo, placa_case7);
             lista_Veiculos = AtenderVeiculo(veiculo);
+>>>>>>> main
             break;
-        case OPCAO8:
+        case OPCAO8: // SAIR
             printf("Saindo do programa. Ate logo!\n");
             saida = 1;
             break;
